@@ -4,4 +4,4 @@ This repository will host a web-based travel planning application designed to au
 
 ## Apps
 
-1. [trips-r-us](trips_r_us\README.md)
+1. [trips-r-us](trips_r_us/README.md)
