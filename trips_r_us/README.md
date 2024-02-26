@@ -81,6 +81,7 @@ In order to connect with YouTrack, all branches should begin with the YouTrack i
 - For new features, add: `feature-your_initials-featurename` (e.g., `TRU-6 feature-jd-nav-bar`).
 - For defects, add: `defect-your_initials-description-of-issue` (e.g., `TRU-81 defect-jd-nav-bar-date_not_converting_as_expected`).
 - For patches, add: `patch-your_initials-description-of-patch` (e.g., `TRU-36 patch-jd-date-formatting`).
+- For document updates, add `docs-your_initials-description-of-change` (e.g., `TRU-4 updated-readme`).
 
 ### Commit Naming Conventions
 
