@@ -48,6 +48,13 @@ For Windows:
 source ./venv/Scripts/activate
 ```
 
+On Windows machines your system's default execution policy will not permit the running of scripts as detailed  the [powershell documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+
+To change your execution policy within the scope of your user run the command:
+```shell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
 ### Install Dependencies
 
 Install the project dependencies as specified in requirements.txt:
