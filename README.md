@@ -9,4 +9,4 @@ This repository will host a web-based travel planning application designed to au
 ## Developers
 
 - Todd Harper
-- Ashley Spriggle
+- Ashley Spriggle 2
