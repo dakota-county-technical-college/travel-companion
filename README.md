@@ -12,4 +12,4 @@ This repository will host a web-based travel planning application designed to au
 - Lidiya Kuznetsova
 - Ashley Spriggle
 - Sam Richter
-
+- JJ Menya
