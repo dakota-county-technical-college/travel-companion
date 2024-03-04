@@ -14,6 +14,7 @@ This project is all about revolutionizing the way people plan their travels. Our
 - [SOPs](#sops)
   - [Branch Naming Conventions](#branch-naming-conventions)
   - [Commit Naming Conventions](#commit-naming-conventions)
+  - [Workflow Instructions for Contributors](#workflow-instructions-for-contributors)
 
 ## Getting Started
 
@@ -94,21 +95,20 @@ In order to connect with YouTrack, all commit messages should following the foll
   I did a thing! #TRU-6 Testing
   @toddharper Is this thing on?
 
-### Contribution Workflow
+### Workflow Instructions for Contributors
 To contribute to the repository, please follow these steps:
 
-- Clone the repository from the dev branch.
-- Create a new branch from dev following the branch naming conventions.
-- Implement your changes and commit them following the commit naming conventions.
-- Open a pull request (PR) to merge your branch back into dev. This PR requires approval from at least 2 reviewers.
-- Once approved and merged into dev, a repository maintainer will create a PR to merge dev into stage for further testing. This PR requires approval from at least 1 reviewer.
-- After successful testing in stage, a final PR will be made to merge stage into main (production). This PR requires approval from at least 1 reviewer.
+Please follow these steps to contribute to the project:
 
+1. **Clone the Repository**: Start by cloning the repository, ensuring you're on the `dev` branch. This is your starting point for any new development.
 
-Pair Programming
-For pair programming contributions:
+2. **Create a New Branch**: From the `dev` branch, create a new branch for your work. Make sure to follow our branch naming conventions to keep our repository organized.
 
-- Include at least one person from the pair in the branch name, using their initials.
-- One of the reviewers must be a part of the project's owners.
-- Ensure that all commits are co-authored, including both contributors' names and email addresses in the commit message.
-This workflow ensures a structured and review-centric development process, fostering high-quality code and collaboration.
+3. **Implement Your Changes**: With your new branch checked out, implement your changes. As you make changes, commit them to your branch using our commit naming conventions. This helps maintain a clear and understandable project history.
+
+4. **Open a Pull Request (PR)**: Once your changes are complete, and you've tested your code to ensure it doesn't introduce errors or breaking changes, open a PR to merge your branch back into `dev`. Your PR must be approved by at least two reviewers. The second reviewer will be responsible for merging it into `dev`.
+
+5. **Final Steps**: After your PR has been approved and merged into `dev`, a repository maintainer will take responsibility for creating a PR to merge `dev` into `stage/main`. This step is crucial for backup and further testing before final deployment.
+
+Thank you for contributing to our project! Your efforts help us build and maintain a robust and efficient codebase.
+
