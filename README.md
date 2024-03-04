@@ -9,4 +9,5 @@ This repository will host a web-based travel planning application designed to au
 ## Developers (Our Team)
 
 - Todd Harper
+- Lidiya Kuznetsova
 - Sam Richter
