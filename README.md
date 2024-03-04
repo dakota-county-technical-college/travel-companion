@@ -6,7 +6,8 @@ This repository will host a web-based travel planning application designed to au
 
 1. [trips-r-us](trips_r_us/README.md)
 
-## Developers
+## Developers (Our Team)
 
 - Todd Harper
+- Lidiya Kuznetsova
 - Ashley Spriggle 2
