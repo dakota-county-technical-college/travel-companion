@@ -49,6 +49,14 @@ For Windows:
 source ./venv/Scripts/activate
 ```
 
+On Windows machines your system's default execution policy will not permit the running of scripts as detailed the [powershell documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+
+To change your execution policy within the scope of your user run the command:
+
+```shell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
 ### Install Dependencies
 
 Install the project dependencies as specified in requirements.txt:
@@ -82,6 +90,7 @@ In order to connect with YouTrack, all branches should begin with the YouTrack i
 - For new features, add: `feature-your_initials-featurename` (e.g., `TRU-6 feature-jd-nav-bar`).
 - For defects, add: `defect-your_initials-description-of-issue` (e.g., `TRU-81 defect-jd-nav-bar-date_not_converting_as_expected`).
 - For patches, add: `patch-your_initials-description-of-patch` (e.g., `TRU-36 patch-jd-date-formatting`).
+- For document updates, add `docs-your_initials-description-of-change` (e.g., `TRU-4 updated-readme`).
 
 ### Commit Naming Conventions
 
