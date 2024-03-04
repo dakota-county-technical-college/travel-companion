@@ -10,4 +10,6 @@ This repository will host a web-based travel planning application designed to au
 
 - Todd Harper
 - Lidiya Kuznetsova
+- Ashley Spriggle
 - Sam Richter
+
