@@ -19,10 +19,10 @@ This project is all about revolutionizing the way people plan their travels. Our
 
 ### Clone Repository
 
-To get started, clone the repository to your local machine:
+To get started, clone the repository to your local machine from the `dev` branch:
 
 ```shell
-git clone https://github.com/dakota-county-technical-college/travel-companion.git
+git clone -b dev https://github.com/dakota-county-technical-college/travel-companion.git
 ```
 
 ### Setup Virtual Environment
@@ -93,3 +93,22 @@ In order to connect with YouTrack, all commit messages should following the foll
   Altogher, the above commit message would look like:
   I did a thing! #TRU-6 Testing
   @toddharper Is this thing on?
+
+### Contribution Workflow
+To contribute to the repository, please follow these steps:
+
+- Clone the repository from the dev branch.
+- Create a new branch from dev following the branch naming conventions.
+- Implement your changes and commit them following the commit naming conventions.
+- Open a pull request (PR) to merge your branch back into dev. This PR requires approval from at least 2 reviewers.
+- Once approved and merged into dev, a repository maintainer will create a PR to merge dev into stage for further testing. This PR requires approval from at least 1 reviewer.
+- After successful testing in stage, a final PR will be made to merge stage into main (production). This PR requires approval from at least 1 reviewer.
+
+
+Pair Programming
+For pair programming contributions:
+
+- Include at least one person from the pair in the branch name, using their initials.
+- One of the reviewers must be a part of the project's owners.
+- Ensure that all commits are co-authored, including both contributors' names and email addresses in the commit message.
+This workflow ensures a structured and review-centric development process, fostering high-quality code and collaboration.
