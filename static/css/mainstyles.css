@@ -1,0 +1,15 @@
+/*
+Gernally speaking, this style sheet should be applied to every page of the site, as it imports
+all of the main style sheets and may apply class styling that doesn't fit in any of the other
+designated style sheets.
+*/
+
+@import url('reset.css');
+@import url('typography.css');
+@import url('layout.css');
+@import url('form-elements.css');
+
+/*  Set class hidden to hide content */
+.hidden {
+    display: none !important;
+}
