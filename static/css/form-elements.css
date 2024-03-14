@@ -1,0 +1,164 @@
+/* This style sheet includes rules for global form elements, including text fields, buttons, etc. */
+
+form {
+    font-family: sans-serif;
+    font-size: 100%;
+}
+
+/* Set the default styling for primary buttons across the site */
+.btn {
+    appearance: none;
+    border: 3px solid black;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    /* padding: ???; */
+    /* margin: ???; */
+    /* font-family: ???; */
+    /* font-size: ???; */
+    /* min-width: ???; */
+    /* width: ???; */
+}
+
+/*
+.btn:hover {
+    background-color: #??????;
+}
+
+.btn:focus {
+    border: ???;
+}
+
+.btn:disabled {
+    background-color: lightgray;
+    curor: not-allowed;
+}
+
+.btn.center {
+    align-self: center;
+}
+*/
+
+/* Set the default styling for secondary buttons across the site */
+.btn-secondary {
+    appearance: none;
+    border: 3px solid black;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    /* padding: ???; */
+    /* margin: ???; */
+    /* font-family: ???; */
+    /* font-size: ???; */
+    /* min-width: ???; */
+    /* width: ???; */
+}
+
+/*
+.btn-secondary:hover {
+    background-color: #??????;
+}
+
+.btn-secondary:focus {
+    border: ???;
+}
+
+.btn-secondary:disabled {
+    background-color: lightgray;
+    curor: not-allowed;
+}
+
+.btn-secondary.center {
+    align-self: center;
+}
+*/
+
+/* Set general styling for all other form elements */
+
+fieldset {
+    margin: 0px auto 50px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+legend {
+    background-color: #225196;
+    color: white;
+    font-family: Exon;
+    font-size: 120%;
+    letter-spacing: .1em;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+/* Apply a red asterisk following the labels of required fields */
+.required:after {
+    content: "*";
+    color: red;
+}
+
+/* All text input fields */
+input:not([type=button]):not([type=reset]):not([type=submit]):not([type=image]) {
+    font-family: sans-serif;
+    font-size: 100%;
+    letter-spacing: .03em;
+    margin: 8px 0 20px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: white;
+    height: 40px;
+    width: 100%;
+    cursor: text;
+}
+
+select {
+    font-family: sans-serif;
+    font-size: 100%;
+    letter-spacing: .03em;
+    margin: 8px 0 20px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: white;
+    height: 40px;
+    width: 100%;
+}
+
+input:hover {
+    background-color: #bbd8e3;
+}
+
+input:focus {
+    outline: 5px auto rgba(0, 150, 255, 1); /* This mirrors Google Chrome's default focus outline */
+}
+
+input::placeholder {
+    font-size: 75%;
+}
+
+div.formColumns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+div.formTwoColumn,
+div.formThreeColumn {
+    width: 100%;
+}
+
+.checkbox {
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+input[type=checkbox] {
+    cursor: pointer !important;
+    width: 20px !important;
+    margin: 0 !important;
+}

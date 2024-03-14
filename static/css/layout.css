@@ -1,0 +1,77 @@
+/*
+This stylesheet defines all global layout conventions, including backagrounds, div / container elements, etc.
+*/
+
+/* A white background with a black border taking up 50% of the screen */
+div.fifty {
+    width: 50%;
+    min-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 3px solid black;
+}
+
+/* A white background with a black border taking up 80% of the screen */
+div.eighty {
+    width: 50%;
+    min-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 3px solid black;
+}
+
+/* Creates a full width white banner, good for breaking up content throughout a page - can be used with section or div tags */
+.fullWhite {
+    background-color: white;
+    padding: 50px;
+}
+
+/* Creates a full width (almost) black banner, best for the footer and not much else - can be used with section or div tags */
+.fullBlack {
+    background-color: #000000;
+    padding: 50px 0;
+}
+
+/* The centered class can be used in section or div elements to center text and other elements within their containers.
+Typically paired with another class, like "fullWhite" */
+section.centered {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+div.centered {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: center;
+    text-align: center;
+}
+
+p.centered {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Special styling for horizontal rules */
+hr {
+    border-top: 4px solid;
+    width: 50px;
+    margin: 15px 0 35px;
+    align-self: center;
+}
+
+/* Special rules for lower breakpoints (not including mobile devices) */
+@media (max-width: 820px) {
+
+    div.fifty,
+    div.eighty {
+        width: 100%;
+        padding: 0 0 20px;
+    }
+}
