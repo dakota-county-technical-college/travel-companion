@@ -7,14 +7,25 @@ from django.shortcuts import redirect
 from django.views import View
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
+from django import forms
+from django.contrib.auth.models import User
+
 
 class HomeView(TemplateView):
     template_name = 'welcome.html'
     extra_context = {'today' : datetime.today}
 
+class CustomUserRegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+
 
 class SignupView(CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserRegistrationForm
     template_name = 'register.html'
     success_url = 'itineraries/hello'
 
