@@ -22,3 +22,7 @@ def register(request):
     else:
         form = userRegistrationForm()
     return render(request, 'signup.html', {'form': form})
+
+#Definition for the experiemental map embed page.
+def map(request):
+    return render(request, 'map.html')
