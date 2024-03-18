@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %} 
+    <form method="POST" style="text-align: left; margin: 0 auto; width: 600px;">{% csrf_token%}
+        {{form.as_p}} 
+        <input type="submit" class="btn btn-secondary" name="submit">
+    </form>
+    {% endblock %}
+</body>
+</html>

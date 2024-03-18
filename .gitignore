@@ -161,3 +161,9 @@ cython_debug/
 
 # Individual Playgrounds
 tvhplayground
+
+# PyCharm #
+.idea/
+*.iml
+*.ipr
+*.iws

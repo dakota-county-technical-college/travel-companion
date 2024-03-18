@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
+from django.urls import path, include
 
-#URLConf
 urlpatterns = [
     path('hello/', views.hello_world),
     path('authorized', views.authorized),
-    path('register/', views.register, name='register')
+    path('register/', views.register, name='register'),
 ]
