@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from itineraries.forms import userRegistrationForm
-from django.http import JsonResponse
+from django.http import HttpResponse
 import requests
 
 # Create your views here.
@@ -25,19 +25,26 @@ def register(request):
         form = userRegistrationForm()
     return render(request, 'signup.html', {'form': form})
 
-#Definition for the experiemental map embed page.
+# Definition for the experiemental map embed page.
 def map(request):
     return render(request, 'map.html')
 
+# Definition for the view which loads our places API data
 def loadPlaceData(request):
+    # The places api url
     placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-    data = {'location': {44.737, -93.079 },
-    'radius': 1500,
+
+    # Our request. In the future these parameters will be accepted as part of the request.
+    data = {'location': '44.737,-93.079',
+    'radius': 5000,
     'type': 'restaurant',
     'key': 'AIzaSyDTxHzXGYgKdtZAkIFvJOtJ4Q_-MwDRljc'}
 
+    # Using the requests library to call the places api
     response = requests.get(placesURL, params=data)
     
+    # Print the resulting json to the server log
     print(response.text)
 
-    return JsonResponse(response)
+    # Return an HttpResponse object to the frontend containing the json data
+    return HttpResponse(response)
