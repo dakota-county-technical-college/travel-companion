@@ -1,6 +1,23 @@
 // Initialize and add the map
 let map;
 
+window.addEventListener("DOMContentLoaded", (event) => init());
+
+function init() {
+  doc = document.getElementById("placesBtn");
+  if (doc) {
+    doc.addEventListener("click", requestPlacesData);
+  }
+}
+
+function requestPlacesData() {
+  const url = "/itineraries/loadPlaceData/";
+
+  var response = fetch(url);
+
+  console.log("weeb" + response.toString());
+}
+
 async function initMap() {
   // The location of DCTC
   const position = { lat: 44.737, lng: -93.079 };
