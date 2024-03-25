@@ -14,13 +14,18 @@ function init() {
 }
 
 // Execute when the user clicks the places button
-async function requestPlacesData() {
+function requestPlacesData() {
+
+    console.log("yep");
     // The URL of our place data view that resides in views.py
     const url = "http://127.0.0.1:8000/itineraries/loadPlaceData/";
-  
-    // Perform a simple get request to the view
-    var response = await fetch(url);
 
+    // Perform a simple get request to the view
+    const promise = fetch(url);
+    promise.then(response => {
+        console.log(response.json());
+    });
+    
     /**
      * TODO: ADD ERROR HANDLING JUST IN CASE
      */

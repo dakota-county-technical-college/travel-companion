@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from itineraries.forms import userRegistrationForm
-from django.http import HttpResponse
-import requests
+from django.http import JsonResponse
+from itineraries.models import Activity
+import requests, json
 
 # Create your views here.
 def hello_world(request):
@@ -34,7 +35,7 @@ def loadPlaceData(request):
     # The places api url
     placesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 
-    # Our request. In the future these parameters will be accepted as part of the request.
+    # Our request. In the future these parameters will be accepted as part of the request from the frontend.
     data = {'location': '44.737,-93.079',
     'radius': 5000,
     'type': 'restaurant',
@@ -42,9 +43,24 @@ def loadPlaceData(request):
 
     # Using the requests library to call the places api
     response = requests.get(placesURL, params=data)
+
+    # load the results from the json reponse into a list
+    locations = json.loads(response.text).get("results")
     
-    # Print the resulting json to the server log
-    print(response.text)
+    print(locations[0])
+
+    for location in locations:
+        a = Activity()
+        a.title = location.get("name")
+        a.address = location.get("vicinity")
+
+        a.rating = location.get("rating")
+
+        a.lat = location.get("geometry").get("location").get('lat')
+        a.lng = location.get("geometry").get("location").get('lng')
+
+        a.save()
+    
 
     # Return an HttpResponse object to the frontend containing the json data
-    return HttpResponse(response)
+    return JsonResponse(response.json())
