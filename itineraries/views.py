@@ -4,13 +4,16 @@ from django.contrib.auth.decorators import login_required
 from itineraries.forms import userRegistrationForm
 
 # Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
 def hello_world(request):
     # Enter a name to replace "Hello World!" with "Hello {{NAME}}"
-    return render(request, 'helloworld.html', {'name': ''})
+    return render(request, 'test/helloworld.html', {'name': ''})
 
-@login_required(login_url='/admin/')
+@login_required(login_url='admin/')
 def authorized(request):
-    return render(request, 'authorized.html')
+    return render(request, 'auth/authorized.html')
 
 def register(request):
     if request.method == 'POST':
@@ -21,8 +24,8 @@ def register(request):
             return redirect('../hello')
     else:
         form = userRegistrationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'auth/signup.html', {'form': form})
 
 #Definition for the experiemental map embed page.
 def map(request):
-    return render(request, 'map.html')
+    return render(request, 'test/map.html')
