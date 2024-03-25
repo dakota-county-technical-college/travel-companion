@@ -52,12 +52,22 @@ def loadPlaceData(request):
     for location in locations:
         a = Activity()
         a.title = location.get("name")
+        a.editSummary = ""
         a.address = location.get("vicinity")
+        a.placeID = ""
 
-        a.rating = location.get("rating")
+        a.openHour = ""
+        a.periods = ""
+        a.rating = "no rating"
 
+        a.urlLink = ""
+
+        a.location = ""
         a.lat = location.get("geometry").get("location").get('lat')
         a.lng = location.get("geometry").get("location").get('lng')
+        a.southwest = ""
+        a.northeast = ""
+        a.website = ""
 
         a.save()
     
