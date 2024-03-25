@@ -2,6 +2,20 @@
 This stylesheet defines all global layout conventions, including backagrounds, div / container elements, etc.
 */
 
+/* Main navigation styling */
+.navbar {
+    position: fixed;
+    width: 100%;
+    background: transparent;
+    z-index: 1000;
+    text-align: center;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
 /* A white background with a black border taking up 50% of the screen */
 div.fifty {
     width: 50%;
@@ -46,9 +60,9 @@ section.centered {
 
 div.centered {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: space-around;
-    align-items: stretch;
+    align-items: center;
     align-content: center;
     text-align: center;
 }
@@ -58,12 +72,29 @@ p.centered {
     margin-top: 20px;
 }
 
+/* The vertical-center class ensures that a div stays centered vertically on the screen */
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* Special styling for horizontal rules */
 hr {
     border-top: 4px solid;
     width: 50px;
     margin: 15px 0 35px;
     align-self: center;
+}
+
+/* Special Layout Scenarios */
+.margin-fifty {
+    margin: 50px;
+}
+
+.width-500 {
+    max-width: 500px;
 }
 
 /* Special rules for lower breakpoints (not including mobile devices) */

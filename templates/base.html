@@ -1,24 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Trips-R-Us{% endblock %}</title>
-    {% block css %}{% endblock %}
-</head>
-<body>
-    <header>
-        <!-- Navigation bar goes here -->
-    </header>
-    
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    
-    <footer>
-        <!-- Footer content goes here -->
-    </footer>
+    {% block css %}<link href="{% static 'css/mainstyles.css' %}" type="text/css" rel="stylesheet">{% endblock %}
+    <script src="https://kit.fontawesome.com/1ea4dc5d95.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <header>
+        {% block nav %}
+        {% include 'components/header-main.html' %}
+        {% endblock %}
+      </header>
+
+      <main>
+        {% block content %}Testing Testing.{% endblock %}
+      </main>
+
+      <footer>
+        {% block footer %}{% endblock %}
+      </footer>
+    </div>
 
     {% block javascript %}{% endblock %}
-</body>
+  
+  </body>
+
 </html>

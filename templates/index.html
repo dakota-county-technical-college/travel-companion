@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="bg-image-home">
+    <div class="content">
+        <div class="centered">
+            <a href="{% url 'home' %}"><img src="{% static 'images/branding/trips-r-us-logo-medium.png' %}" alt="Trips-R-Us-Logo" class="logo margin-fifty" draggable="false"></a>
+        </div>
+        <div class="centered vertical-center width-500">
+            <h1 class="white">Let's Explore the World</h1>
+            <p class="white">Plan the itinerary for your trip in moments! Get started by entering your travel details below.</p>
+        </div>
+        <form class="preferences-form" action="{% url 'hello' %}" method="POST">
+            {% csrf_token %}
+            <div class="label-and-input">
+                <label for="destination">Destination:
+                    <input type="text" id="destination" name="destination">
+                </label>
+            </div>
+            <div class="label-and-input">
+                <label for="start-date">Start Date:
+                    <input type="date" id="start-date" name="start-date">
+                </label>
+            </div>
+            <div class="label-and-input">
+                <label for="end-date">End Date:
+                    <input type="date" id="end-date" name="end-date">
+                </label>
+            </div>
+            <div class="label-and-input">
+                <label for="travelers">Number of Travelers:
+                    <span>
+                        <span style="color: #449dbd;"><i class="fa-solid fa-user"></i></span>
+                        <input type="number" id="travelers" name="travelers" min="1">
+                    </span>
+                </label>
+            </div>
+            <button type="submit" id="submit-button" class="check-button">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

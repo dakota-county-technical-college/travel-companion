@@ -1,0 +1,69 @@
+/* Set the default styling for primary buttons across the site */
+.btn {
+    appearance: none;
+    border: 3px solid black;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    /* padding: ???; */
+    /* margin: ???; */
+    /* font-family: ???; */
+    /* font-size: ???; */
+    /* min-width: ???; */
+    /* width: ???; */
+}
+
+/*
+.btn:hover {
+    background-color: #??????;
+}
+
+.btn:focus {
+    border: ???;
+}
+
+.btn:disabled {
+    background-color: lightgray;
+    curor: not-allowed;
+}
+
+.btn.center {
+    align-self: center;
+}
+*/
+
+/* Set the default styling for secondary buttons across the site */
+.btn-secondary {
+    appearance: none;
+    border: 3px solid black;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    /* padding: ???; */
+    /* margin: ???; */
+    /* font-family: ???; */
+    /* font-size: ???; */
+    /* min-width: ???; */
+    /* width: ???; */
+}
+
+/*
+.btn-secondary:hover {
+    background-color: #??????;
+}
+
+.btn-secondary:focus {
+    border: ???;
+}
+
+.btn-secondary:disabled {
+    background-color: lightgray;
+    curor: not-allowed;
+}
+
+.btn-secondary.center {
+    align-self: center;
+}
+*/
