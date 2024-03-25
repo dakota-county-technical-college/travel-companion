@@ -11,7 +11,7 @@ This project is all about revolutionizing the way people plan their travels. Our
   - [Install Dependencies](#install-dependencies)
   - [Install New Dependency](#install-new-dependency)
   - [Package Dependencies](#package-dependencies)
-- [SOPs](#sops)
+- [SOPs](#second-dev-sets-different-link)
   - [Branch Naming Conventions](#branch-naming-conventions)
   - [Commit Naming Conventions](#commit-naming-conventions)
   - [Workflow Instructions for Contributors](#workflow-instructions-for-contributors)
