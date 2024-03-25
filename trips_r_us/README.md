@@ -1,20 +1,26 @@
 # About Trips Are US (trips_r_us)
 
-This project is all about revolutionizing the way people plan their travels. Our web-based application offers personalized travel planning experiences by generating custom itineraries tailored to user preferences. Whether you're looking for adventure, relaxation, cultural immersion, or culinary experiences, Trips-R-Us makes your travel planning seamless and intuitive. Dive into our code, contribute, or simply explore how we're using Django and cutting-edge technologies to bring personalized travel planning to your fingertips. Join us on this journey to make travel planning easier, smarter, and more personalized than ever before!
+This project is all about revolutionizing the way people plan their travels. Our web-based application offers
+personalized travel planning experiences by generating custom itineraries tailored to user preferences. Whether you're
+looking for adventure, relaxation, cultural immersion, or culinary experiences, Trips-R-Us makes your travel planning
+seamless and intuitive. Dive into our code, contribute, or simply explore how we're using Django and cutting-edge
+technologies to bring personalized travel planning to your fingertips. Join us on this journey to make travel planning
+easier, smarter, and more personalized than ever before!
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-  - [Clone Repository](#clone-repository)
-  - [Setup Virtual Environment](#setup-virtual-environment)
-  - [Activate Virtual Environment](#activate-virtual-environment)
-  - [Install Dependencies](#install-dependencies)
-  - [Install New Dependency](#install-new-dependency)
-  - [Package Dependencies](#package-dependencies)
+    - [Clone Repository](#clone-repository)
+    - [Setup Virtual Environment](#setup-virtual-environment)
+    - [Activate Virtual Environment](#activate-virtual-environment)
+    - [Install Dependencies](#install-dependencies)
+    - [Install New Dependency](#install-new-dependency)
+    - [Package Dependencies](#package-dependencies)
+    - [TripsAreUs The Project](#trips-are-us-the-project)
 - [SOPs](#sops)
-  - [Branch Naming Conventions](#branch-naming-conventions)
-  - [Commit Naming Conventions](#commit-naming-conventions)
-  - [Workflow Instructions for Contributors](#workflow-instructions-for-contributors)
+    - [Branch Naming Conventions](#branch-naming-conventions)
+    - [Commit Naming Conventions](#commit-naming-conventions)
+    - [Workflow Instructions for Contributors](#workflow-instructions-for-contributors)
 
 ## Getting Started
 
@@ -49,7 +55,8 @@ For Windows:
 source ./venv/Scripts/activate
 ```
 
-On Windows machines your system's default execution policy will not permit the running of scripts as detailed the [powershell documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+On Windows machines your system's default execution policy will not permit the running of scripts as detailed
+the [powershell documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
 
 To change your execution policy within the scope of your user run the command:
 
@@ -88,7 +95,8 @@ pip freeze > requirements.txt
 In order to connect with YouTrack, all branches should begin with the YouTrack issue ID, as applicable (ie. "TRU-6")
 
 - For new features, add: `feature-your_initials-featurename` (e.g., `TRU-6 feature-jd-nav-bar`).
-- For defects, add: `defect-your_initials-description-of-issue` (e.g., `TRU-81 defect-jd-nav-bar-date_not_converting_as_expected`).
+- For defects, add: `defect-your_initials-description-of-issue` (
+  e.g., `TRU-81 defect-jd-nav-bar-date_not_converting_as_expected`).
 - For patches, add: `patch-your_initials-description-of-patch` (e.g., `TRU-36 patch-jd-date-formatting`).
 - For document updates, add `docs-your_initials-description-of-change` (e.g., `TRU-4 updated-readme`).
 
@@ -104,20 +112,92 @@ In order to connect with YouTrack, all commit messages should following the foll
   I did a thing! #TRU-6 Testing
   @toddharper Is this thing on?
 
+### Trips Are Us the project
+
+1. **trips_r_us:** Project was generated within the travel-companion repository by running this shell command: You could
+   think of
+   this as the projects engine
+
+   ```bash
+   django-admin startapp itinerary
+   ```
+
+2. **For any new app update `settings.py`:** Open the `settings.py` file located in your trips_r_us(the engine). This
+   file is created
+   automatically when you start a new Django project. Add your new app to the `INSTALLED_APPS` section by including its
+   name as a string: We currently have 2 added apps on this project.
+
+   ```shell
+   INSTALLED_APPS = [
+      ...
+    'itineraries',
+    'home',
+   ]
+   ```
+
+   This step tells The project to recognize and include the `itineraries` and `home` apps, making its functionalities
+   available to the entire project.
+
+3. **Incorporating App URLs into the Project's `urls.py`:** To integrate your app's URLs with your project, modify the
+   project's `urls.py` file to include the app's URL configurations. Use the `include` function to import your app's
+   URLs, allowing for a clean separation of URLs by app:
+
+   ```shell
+   from django.urls import path, include  # Don't forget to import include
+
+   urlpatterns = [
+      ...
+      path('itinerary/', include('itinerary.urls')),  # Include your app's URLs
+      path('', include('home.urls')),
+   ]
+   ```
+
+4. **Run Migrations:**
+   Django uses migrations to apply changes to your database schema. These migrations make sure your database is
+   up-to-date with your models. When you first set up your project, you need to apply the initial migrations for
+   Django's built-in apps, such as `admin` and `auth`, which provide the admin panel and user authentication,
+   respectively. Run the following command to apply these initial migrations:
+
+   ```shell
+   python manage.py migrate
+   ```
+
+   This command configures your database to work with Django's default apps, setting up necessary tables for user
+   management and admin functionalities.
+
+5. **Creating a Superuser:**
+   A superuser has full access to your project's admin site, allowing you to manage aspects like user accounts and
+   groups. After your database is set up, create a superuser account by running:
+
+   ```shell
+   python manage.py createsuperuser
+   ```
+
+   Follow the prompts to set a username, email, and password for the superuser. This step is essential for accessing the
+   Django admin interface and managing your project's data.
+
 ### Workflow Instructions for Contributors
+
 To contribute to the repository, please follow these steps:
 
 Please follow these steps to contribute to the project:
 
-1. **Clone the Repository**: Start by cloning the repository, ensuring you're on the `dev` branch. This is your starting point for any new development.
+1. **Clone the Repository**: Start by cloning the repository, ensuring you're on the `dev` branch. This is your starting
+   point for any new development.
 
-2. **Create a New Branch**: From the `dev` branch, create a new branch for your work. Make sure to follow our branch naming conventions to keep our repository organized.
+2. **Create a New Branch**: From the `dev` branch, create a new branch for your work. Make sure to follow our branch
+   naming conventions to keep our repository organized.
 
-3. **Implement Your Changes**: With your new branch checked out, implement your changes. As you make changes, commit them to your branch using our commit naming conventions. This helps maintain a clear and understandable project history.
+3. **Implement Your Changes**: With your new branch checked out, implement your changes. As you make changes, commit
+   them to your branch using our commit naming conventions. This helps maintain a clear and understandable project
+   history.
 
-4. **Open a Pull Request (PR)**: Once your changes are complete, and you've tested your code to ensure it doesn't introduce errors or breaking changes, open a PR to merge your branch back into `dev`. Your PR must be approved by at least two reviewers. The second reviewer will be responsible for merging it into `dev`.
+4. **Open a Pull Request (PR)**: Once your changes are complete, and you've tested your code to ensure it doesn't
+   introduce errors or breaking changes, open a PR to merge your branch back into `dev`. Your PR must be approved by at
+   least two reviewers. The second reviewer will be responsible for merging it into `dev`.
 
-5. **Final Steps**: After your PR has been approved and merged into `dev`, a repository maintainer will take responsibility for creating a PR to merge `dev` into `stage/main`. This step is crucial for backup and further testing before final deployment.
+5. **Final Steps**: After your PR has been approved and merged into `dev`, a repository maintainer will take
+   responsibility for creating a PR to merge `dev` into `stage/main`. This step is crucial for backup and further
+   testing before final deployment.
 
 Thank you for contributing to our project! Your efforts help us build and maintain a robust and efficient codebase.
-

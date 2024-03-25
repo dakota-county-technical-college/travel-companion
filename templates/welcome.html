@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>welcome</title>
+  </head>
+  <body>
+    {% block content %}
+    <header>
+      <title>Trips are us!</title>
+    </header>
+
+    <body>
+        <h1>Welcome to Trips are us!</h1>
+        <p>Today is {{today}}</p>
+    </body>
+
+    {% endblock %}
+
+    <p>Today is {{today}}</p>
+  </body>
+
+</html>
