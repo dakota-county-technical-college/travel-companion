@@ -16,6 +16,10 @@ This project is all about revolutionizing the way people plan their travels. Our
   - [Commit Naming Conventions](#commit-naming-conventions)
   - [Workflow Instructions for Contributors](#workflow-instructions-for-contributors)
 
+- [Dealing with Merge Conflics](#dealing-with-merge-conflicts)
+  - [Scenario](#scenario)
+  - [Steps to Resolve Merge Conflicts](#steps-to-resolve-merge-conflicts)
+
 ## Getting Started
 
 ### Clone Repository
@@ -105,6 +109,7 @@ In order to connect with YouTrack, all commit messages should following the foll
   @toddharper Is this thing on?
 
 ### Workflow Instructions for Contributors
+
 To contribute to the repository, please follow these steps:
 
 Please follow these steps to contribute to the project:
@@ -121,3 +126,63 @@ Please follow these steps to contribute to the project:
 
 Thank you for contributing to our project! Your efforts help us build and maintain a robust and efficient codebase.
 
+## Dealing with Merge Conflicts
+
+When working with Git, merge conflicts can sometimes occur, especially when multiple people are working on the same parts of a project. This guide will help you resolve merge conflicts in Visual Studio Code (VSCode).
+
+## Scenario
+
+You're working on the branch `feature/jj/userlogin` and encounter a merge conflict when trying to merge into the `dev` branch.
+
+## Steps to Resolve Merge Conflicts
+
+1. **Ensure Your Branch is Up-to-Date**
+
+First, make sure your local `dev` branch is up to date with the remote `dev` branch.
+
+```sh
+git checkout dev
+git pull origin dev
+```
+
+2. **Switch to Your Feature Branch**
+
+Switch back to your feature branch.
+
+```sh
+git checkout feature/jj/userlogin
+```
+
+3. **Start the Merge Process**
+
+Attempt to merge dev into your feature branch. This is where you might encounter conflicts.
+
+```sh
+git merge dev
+```
+
+4. **In VSCode:**
+
+The Source Control panel will show merge conflicts.
+Click on a conflicted file to open it.
+VSCode presents three options for each conflict: Accept Current Change, Accept Incoming Change, Accept Both Changes.
+Make your choices for how to resolve each conflict.
+
+5. **Save and Commit**
+
+After resolving all conflicts, save your files in VSCode
+
+```sh
+git add .
+git commit -m "Resolved merge conflicts merging dev into feature/jj/userlogin"
+```
+
+6. **Push Your Changes**
+
+Once conflicts are resolved and committed, you can push your changes back to the remote repository.
+
+```sh
+git push origin feature/jj/userlogin
+```
+
+[Additional Resources](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)
