@@ -7,9 +7,8 @@ from itineraries.forms import userRegistrationForm
 def index(request):
     return render(request, 'index.html')
 
-def hello_world(request):
-    # Enter a name to replace "Hello World!" with "Hello {{NAME}}"
-    return render(request, 'test/helloworld.html', {'name': ''})
+def destinations(request):
+    return render(request, 'test/destinations.html', {'name': ''})
 
 @login_required(login_url='admin/')
 def authorized(request):
