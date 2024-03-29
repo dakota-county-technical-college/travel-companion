@@ -11,7 +11,7 @@
             <h1 class="white">Let's Explore the World</h1>
             <p class="white">Plan the itinerary for your trip in moments! Get started by entering your travel details below.</p>
         </div>
-        <form class="preferences-form" action="{% url 'destinations' %}" method="POST">
+        <form class="preferences-form" action="{% url 'searchresults' %}" method="post">
             {% csrf_token %}
             <div class="label-and-input">
                 <label for="destination">Destination:
