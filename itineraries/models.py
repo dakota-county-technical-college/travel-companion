@@ -55,6 +55,18 @@ class Day(models.Model):
     date = models.DateField()
     activities = models.ManyToManyField(Activity, through='ActivityAssignment')
 
+    ## New below \/ ##
+    # For now just 3 values, but can add more if needed. #
+    breakfast = ("Activity1", "8:30am", 60) #activity_type = ("Activity#", "StartTime", "DurationInMinutes")
+    visit1 = ("Activity2", "9:30am", 90)
+    appt = ("Activity3", "11:00am", 60) #appt = appointment or anything by time like a booking to a museum. StartTime and Duration can be changed, NP.
+    lunch = ("Activity4", "12:00pm", 60)
+    visit2 = ("Activity5", "1:00pm", 90) #should we use 24-hr format (eg - 1:00pm vs 13:00pm)
+    snack = ("Activity6", "2:30pm", 30) #something quick like getting coffee or stopping to buy a snack
+    visit3 = ("Activity7", "3:00pm", 150) #depending on location - beach, hike, etc. (extra 30 minutes to get ready or get to dinner location)
+    dinner = ("Activity8", "5:30pm", 120) 
+    #don't know how to describe leisure time - just alone time for traveler, nothing planned.  
+
     def __str__(self):
         return self.date.strftime('%Y-%m-%d')
     
