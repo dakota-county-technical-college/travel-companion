@@ -9,19 +9,50 @@
     <h1>Recommended Places Page</h1>
     <div class="recommended-places">
       {% if error %}
-      <p>Error: {{ error }}</p>
+          <p>Error: {{ error }}</p>
       {% else %}
-      <div class="recommended-places">
-        {% if places %} {% for place in places %}
-        <div class="place">
-          <h2>Name: {{ place.0 }}</h2>
-          <p>Vicinity: {{ place.1 }}</p>
-        </div>
-        {% endfor %} {% else %}
-        <p>No places found.</p>
-        {% endif %}
-      </div>
+          {% if places %}
+              {% for place in places %}
+                  <div class="place">
+                      <h2>{{ place.name }}</h2>
+                      <p>Address: {{ place.address }}</p>
+                      <p>Rating: {{ place.rating }}</p>
+                      <p>Open Hours: {{ place.openHour }}</p>
+                      <p>Business Status: {{ place.businessStatus }}</p>
+                      {% if place.photos %}
+                          <img src="{{ place.photos }}" alt="Photo of {{ place.name }}">
+                      {% endif %}
+                      <p>Location: {{ place.location }}</p>
+                      {% if place.urlLink %}
+                          <a href="{{ place.urlLink }}" target="_blank">View on Google Maps</a>
+                      {% endif %}
+                      <form method="POST" action="{% url 'addactivity' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="title" value="{{ place.title }}">
+                        <input type="hidden" name="editSummary" value="{{ place.editSummary }}">
+                        <input type="hidden" name="name" value="{{ place.name }}">
+                        <input type="hidden" name="address" value="{{ place.address }}">
+                        <input type="hidden" name="placeID" value="{{ place.placeID }}">
+                        <input type="hidden" name="photos" value="{{ place.photos }}">
+                        <input type="hidden" name="openHour" value="{{ place.openHour }}">
+                        <input type="hidden" name="rating" value="{{ place.rating }}">
+                        <input type="hidden" name="location" value="{{ place.location }}">
+                        <input type="hidden" name="lat" value="{{ place.lat }}">
+                        <input type="hidden" name="lng" value="{{ place.lng }}">
+                        <input type="hidden" name="urlLink" value="{{ place.urlLink }}">
+                        <!-- Add inputs for any other relevant fields -->
+                        <button type="submit">Add to Itinerary</button>
+                      </form>               
+                  </div>
+              {% endfor %}
+          {% else %}
+              <p>No places found.</p>
+          {% endif %}
       {% endif %}
     </div>
+    
+    
+  
+    
   </body>
 </html>

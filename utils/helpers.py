@@ -21,7 +21,7 @@ def initialize_gmaps(api_key):
     """Initializes the Google Maps client with an API key."""
     return googlemaps.Client(api_key)
 
-def search_places_nearby(gmaps, location, radius=1000, place_type='tourist_attraction'):
+def search_places_nearby(gmaps, location, radius=5000, place_type='shopping_mall'):
     """Searches for places nearby a given location.
     
     Args:
@@ -56,14 +56,63 @@ def geocode_location(gmaps, location_name):
     else:
         return False, f"Could not geocode the location: {location_name}"
     
-def process_and_return_places(places):
-    """Extracts places and their vicinities and returns them as a list of tuples."""
-    extracted_places = []
+
+def process_and_return_places(places, api_key):
+    """Extracts details from places and returns them as a list of dictionaries, each representing an Activity."""
+    extracted_activities = []
     for place in places:
-        # Extract the name and vicinity and store them in a tuple
-        extracted_place = (place['name'], place['vicinity'])
-        extracted_places.append(extracted_place)
-    return extracted_places
+        # Initialize an empty dictionary for the current place
+        activity = {}
+
+        # Basic place details
+        activity['title'] = place.get('name', '')
+        activity['editSummary'] = 'Summary of ' + place.get('name', '')
+        activity['name'] = place.get('name', '')
+        activity['address'] = place.get('vicinity', '')
+        activity['placeID'] = place.get('place_id', '')
+
+        # Handling photos - only storing the first photo reference
+        photos = place.get('photos', [])
+        if photos:
+            photo_reference = photos[0].get('photo_reference', '')
+            if photo_reference:
+                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_reference}&key={api_key}"
+                activity['photos'] = photo_url
+            else:
+                activity['photos'] = ''
+        else:
+            activity['photos'] = ''
+
+        # Open hours
+        open_now = place.get('opening_hours', {}).get('open_now', False)
+        activity['openHour'] = 'Open Now' if open_now else 'Closed'
+        # Assuming 'periods' needs specific processing or fetching from elsewhere as it's not directly available in this input
+        activity['periods'] = 'Not Available'
+
+        # Rating and URL link
+        activity['rating'] = str(place.get('rating', ''))
+        # Assuming 'urlLink' requires generating or fetching from elsewhere as it's not directly available in this input
+        activity['urlLink'] = 'URL Placeholder'
+
+        activity['businessStatus'] = str(place.get('business_status', ''))
+        # Location details
+        location = place.get('geometry', {}).get('location', {})
+        viewport = place.get('geometry', {}).get('viewport', {})
+        activity['location'] = f"{location.get('lat', '')}, {location.get('lng', '')}"
+        activity['lat'] = str(location.get('lat', ''))
+        activity['lng'] = str(location.get('lng', ''))
+        activity['northeast'] = f"{viewport.get('northeast', {}).get('lat', '')}, {viewport.get('northeast', {}).get('lng', '')}"
+        activity['southwest'] = f"{viewport.get('southwest', {}).get('lat', '')}, {viewport.get('southwest', {}).get('lng', '')}"
+
+        # Additional fields
+        activity['website'] = 'Website Placeholder'  # Assuming this needs fetching or a placeholder for now
+
+        # Append the activity dictionary to the list
+        extracted_activities.append(activity)
+
+    
+    return extracted_activities
+
 
 
 def get_recommendation(destination):
@@ -80,7 +129,7 @@ def get_recommendation(destination):
     if not success:
         return False, places_or_error  # Ensure returning a tuple
 
-    search_results = process_and_return_places(places_or_error)
+    search_results = process_and_return_places(places_or_error, api_key)
     return True, search_results
 
 

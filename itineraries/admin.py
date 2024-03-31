@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Traveler, Activity
+
+admin.site.register(Traveler)
+admin.site.register(Activity)

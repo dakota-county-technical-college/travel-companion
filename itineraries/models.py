@@ -22,32 +22,28 @@ class Traveler(models.Model):
     
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
-        
+
+
 class Activity (models.Model):
     title = models.CharField(max_length=255)
-    # Add other fields as needed
     editSummary = models.CharField(max_length=255) # summary of the place
     name = models.CharField(max_length=255) #name of place
     address = models.CharField(max_length=255) #address of place
-    placeID = models.CharField(max_length=255) # unique identifier of place
-    
-    # add a PHOTOS field, decide where to upload the photos from API call
-    
+    placeID = models.CharField(max_length=255)  # unique identifier of the place
+    photos = models.TextField(blank=True, null=True)  # Storing photo URLs or references
     openHour = models.CharField(max_length=255) # open hours of a business/place
-    periods = models.CharField(max_length=255) # array of opening periods covering 7 days in chronological order
-    ##### DECIDE IF WE WANT THIS ----> businessStatus = models.CharField(max_length=255) 
-            #status of business/place -> Operational, Closed Temporarily, Closed Permanently
-    
+    periods = models.TextField(blank=True, null=True)  # JSON string of opening periods covering 7 days
+    businessStatus = models.CharField(max_length=255, blank=True, null=True)
     rating = models.CharField(max_length=255) # rating of the place/business
-    urlLink = models.CharField(max_length=255) # contains URL of the Official Google page for the place. 
-        ##Applications must link to or embed this page on any screen 
-            ##that shows detailed results about the place to the user.
+    urlLink = models.CharField(max_length=255, blank=True, null=True)  # URL of the Official Google page for the place.
     location = models.CharField(max_length=255) # location of the business/place
-    lat = models.CharField(max_length=255) # lattitude in decimal degrees
-    lng = models.CharField(max_length=255) # longitude in decimal dgrees
-    northeast = models.CharField(max_length=255) # LatLng
-    southwest = models.CharField(max_length=255) # LatLng
-    website = models.CharField(max_length=255) # Authoritative website for the place, like the business homepage.
+    northeast = models.CharField(max_length=255, blank=True, null=True)  # Northeast bound of the location
+    southwest = models.CharField(max_length=255, blank=True, null=True)  # Southwest bound of the location
+    website = models.CharField(max_length=255, blank=True, null=True)  # Authoritative website for the place
+
+    def __str__(self):
+        return self.name
+
 
 ########## FOLLOWING ARE MERELY PLACEHOLDERS THAT SHOULD BE REVISED AND MOVED ABOVE THIS LINE WHEN READY ##########
 
