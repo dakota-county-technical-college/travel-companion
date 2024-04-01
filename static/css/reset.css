@@ -23,3 +23,22 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/* For Chrome and Safari */
+input[type="date"].hide-datepicker::-webkit-inner-spin-button,
+input[type="date"].hide-datepicker::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+/* For Firefox */
+input[type="date"].hide-datepicker::-moz-calendar {
+    display: none;
+}
+
+/* General rules for other browsers (may not work for all) */
+input[type="date"].hide-datepicker {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+}

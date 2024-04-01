@@ -11,32 +11,32 @@
             <h1 class="white">Let's Explore the World</h1>
             <p class="white">Plan the itinerary for your trip in moments! Get started by entering your travel details below.</p>
         </div>
-        <form class="preferences-form" action="{% url 'hello' %}" method="POST">
+        <form class="preferences-form" method="POST">
             {% csrf_token %}
             <div class="label-and-input">
                 <label for="destination">Destination:
-                    <input type="text" id="destination" name="destination">
+                    {{ form.destination }}
                 </label>
             </div>
             <div class="label-and-input">
                 <label for="start-date">Start Date:
-                    <input type="date" id="start-date" name="start-date">
+                    {{ form.start_date }}
                 </label>
             </div>
             <div class="label-and-input">
                 <label for="end-date">End Date:
-                    <input type="date" id="end-date" name="end-date">
+                    {{ form.end_date }}
                 </label>
             </div>
             <div class="label-and-input">
                 <label for="travelers">Number of Travelers:
                     <span>
                         <span style="color: #449dbd;"><i class="fa-solid fa-user"></i></span>
-                        <input type="number" id="travelers" name="travelers" min="1">
+                        {{ form.travelers }}
                     </span>
                 </label>
             </div>
-            <button type="submit" id="submit-button" class="check-button">
+            <button type="submit" id="submit-button" class="btn contained bt2">
                 <i class="fa fa-check" aria-hidden="true"></i>
             </button>
         </form>

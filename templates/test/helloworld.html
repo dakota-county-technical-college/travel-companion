@@ -11,9 +11,17 @@
   <body>
     <div id="content-wrapper">
       {% if name %}
-      <p>Hello {{name}}!</p>
+      <p>Hello {{ name }}!</p>
       {% else %}
       <p>Hello World!</p>
+      {% endif %}
+      {% if form_data %}
+      <p>Destination: {{ form_data.destination }}</p>
+      <p>Start Date: {{ form_data.start_date }}</p>
+      <p>End Date: {{ form_data.end_date }}</p>
+      <p>Number of Travelers: {{ form_data.travelers }}</p>
+      {% else %}
+      <p>No data received.</p>
       {% endif %}
     </div>
     <script></script>

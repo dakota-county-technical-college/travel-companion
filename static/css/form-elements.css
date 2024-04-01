@@ -1,4 +1,4 @@
-/* This style sheet includes rules for global form elements, including text fields, buttons, etc. */
+/* This style sheet includes rules for global form elements, including text fields, etc. */
 
 form {
     font-family: sans-serif;
@@ -136,24 +136,4 @@ input {
 .preferences-form .label-and-input span {
     display: flex;
     align-items: center;
-}
-
-.check-button {
-    background-color: #449dbd;
-    border: 2px solid transparent;
-    border-radius: 15px;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.check-button:hover {
-    background-color: transparent;
-    border: 2px solid #449dbd;
-    color: #449dbd;
 }

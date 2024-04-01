@@ -9,9 +9,27 @@ designated style sheets.
 @import url('layout.css');
 @import url('images.css');
 @import url('buttons.css');
+@import url('modals.css');
 @import url('form-elements.css');
+
+/* Set base CSS properties as constants */
+:root {
+    --primary-text: rgba(0, 0, 0, 1);
+    --secondary-text: rgba(255, 255, 255, 1);
+    --dark-blue: rgba(0, 125, 171, 1);
+    --light-blue: rgba(182, 242, 255, 1);
+    --yellow: rgba(252, 187, 1, 1);
+    --orange: rgba(191, 106, 15, 1);
+    /* Transparent versions */
+    --dark-blue-transparent: rgba(0, 125, 171, 0.5);
+    --light-blue-transparent: rgba(182, 242, 255, 0.5);
+    --yellow-transparent: rgba(252, 187, 1, 0.5);
+    --orange-transparent: rgba(191, 106, 15, 0.5);
+}
 
 /*  Set class hidden to hide content */
 .hidden {
     display: none !important;
 }
+
+/* Breakpoints to Handle: 1170px, 965px, 580px */
