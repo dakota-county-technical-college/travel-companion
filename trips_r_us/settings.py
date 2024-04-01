@@ -72,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'itineraries.context_processors.login_form',
+                'itineraries.context_processors.register_form'
             ],
         },
     },

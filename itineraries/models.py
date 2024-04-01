@@ -22,6 +22,15 @@ class Traveler(models.Model):
     
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
+
+class PreferencesFormResponse(models.Model):
+    destination = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    travelers = models.IntegerField()
+
+    def __str__(self):
+        return f"Destination: {self.destination}, Travelers: {self.travelers}"
         
 class Activity (models.Model):
     title = models.CharField(max_length=255)
