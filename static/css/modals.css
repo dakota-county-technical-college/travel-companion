@@ -1,0 +1,186 @@
+/*
+This stylesheet defines styles for modal boxes - it lives in its own style sheet since it has some overlap with (and should override)
+default layout, fonts, buttons, etc.
+*/
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8000;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal h1 {
+    font-size: 30px;
+}
+
+.modal-box {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.modal-box p {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.modal-box a {
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px
+}
+
+.modal-box button {
+    font-size: 12px;
+    padding: 10px 45px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+.modal-box form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.modal-box .form-group {
+    width: 100%;
+}
+
+.modal-box input {
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+.modal-form {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 8002;
+}
+
+.modal-box.active .sign-in {
+    transform: translateX(100%);
+}
+
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 8001;
+}
+
+.modal-box.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 8005;
+}
+
+@keyframes move {
+
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 8001;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 8005;
+    }
+}
+
+.modal-toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 9000;
+}
+
+.modal-box.active .modal-toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.modal-toggle {
+    background-color: var(--dark-blue);
+    height: 100%;
+    background: linear-gradient(to right, var(--light-blue), var(--dark-blue));
+    color: white;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.modal-box.active .modal-toggle {
+    transform: translateX(50%);
+}
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.modal-box.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.modal-box.active .toggle-right {
+    transform: translateX(200%);
+}

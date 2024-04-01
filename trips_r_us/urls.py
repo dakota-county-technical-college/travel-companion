@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('itineraries.urls')),
     path('admin/', admin.site.urls),
-    path('tvhplayground/', include('tvhplayground.urls'))
+    path('itineraries/', include('itineraries.urls')),
 ]
