@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import PreferencesForm
 from .models import PreferencesFormResponse
@@ -51,6 +51,25 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'header-main.html', {'form': form})
 
+
+
+'''
+Logs in a user and redirects to the home page.
+
+When a user submits login credentials, it checks if the provided username and password are valid. If they are, the user is logged in and redirected to the home page.
+'''
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return redirect('home')
+    return render(request, 'header-main.html')
 
 
 #Definition for the experiemental map embed page.
