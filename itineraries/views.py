@@ -1,8 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm, PreferencesForm
+from .forms import PreferencesForm
 from .models import PreferencesFormResponse
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
     if request.method == 'POST':
@@ -32,16 +34,24 @@ def hello_world(request):
 def authorized(request):
     return render(request, 'auth/authorized.html')
 
-def register(request):
+
+'''
+Registers a new user and redirects to the home page.
+
+When a new user submits registration information, it's saved to the database, and then the user is redirected to the home page.
+'''
+
+def signup(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('../hello')
+            form.save()
+            return redirect('home')
     else:
-        form = UserRegistrationForm()
-    return render(request, 'auth/signup.html', {'form': form})
+        form = UserCreationForm()
+    return render(request, 'header-main.html', {'form': form})
+
+
 
 #Definition for the experiemental map embed page.
 def map(request):
