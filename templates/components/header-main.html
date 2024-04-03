@@ -2,6 +2,11 @@
     <i class="fa-solid fa-bars fa-2xl"></i>
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}!</p>
+        <!-- Uncomment this if we'll need to add a logout button -->
+        <!-- <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="">Log Out</button>
+        </form> -->
     {% else %}
         <p>
             <button id="nav-register-button" class="btn txt bt2">Sign Up</button>

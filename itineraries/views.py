@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import PreferencesForm
 from .models import PreferencesFormResponse
@@ -70,6 +70,11 @@ def login_view(request):
         else:
             return redirect('home')
     return render(request, 'header-main.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 #Definition for the experiemental map embed page.
