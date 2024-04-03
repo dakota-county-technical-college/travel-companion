@@ -41,6 +41,12 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        {{ register_form.email }}
+                        {% if register_form.email.errors %}
+                            <div class="error">{{ register_form.email.errors.as_text }}</div>
+                        {% endif %}
+                    </div>t
+                    <div class="form-group">
                         {{ register_form.password1 }}
                         {% if register_form.password1.errors %}
                             <div class="error">{{ register_form.password1.errors.as_text }}</div>
