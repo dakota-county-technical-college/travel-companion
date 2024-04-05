@@ -2,6 +2,11 @@
     <i class="fa-solid fa-bars fa-2xl"></i>
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}!</p>
+        <!-- Uncomment this if we'll need to add a logout button -->
+        <!-- <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="">Log Out</button>
+        </form> -->
     {% else %}
         <p>
             <button id="nav-register-button" class="btn txt bt2">Sign Up</button>
@@ -14,7 +19,7 @@
     <div class="modal-background">
         <div class="modal-box" id="auth-modal">
             <div class="modal-form sign-up">
-                <form action="" method="POST">
+                <form action="{% url 'signup' %}" method="POST">
                     {% csrf_token %}
                     <h2>Create Account</h2>
                     <div class="form-group">
@@ -36,6 +41,12 @@
                         {% endif %}
                     </div>
                     <div class="form-group">
+                        {{ register_form.email }}
+                        {% if register_form.email.errors %}
+                            <div class="error">{{ register_form.email.errors.as_text }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
                         {{ register_form.password1 }}
                         {% if register_form.password1.errors %}
                             <div class="error">{{ register_form.password1.errors.as_text }}</div>
@@ -51,7 +62,7 @@
                 </form>
             </div>
             <div class="modal-form sign-in">
-                <form action="" method="POST">
+                <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <h2>Sign In</h2>
                     <div class="form-group">
