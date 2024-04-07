@@ -14,6 +14,62 @@ This stylesheet defines all global layout conventions, including backagrounds, d
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    pointer-events: none;
+}
+
+.navbar ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar i,
+.navbar button,
+.navbar li {
+    pointer-events: auto;
+}
+
+.navbar li {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.navbar a {
+    height: 100%;
+    padding: 0 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar.secondary {
+    background-color: white;
+    position: static;
+    height: 200px;
+}
+
+/* Display rules */
+.inline {
+    display: inline;
+}
+
+.flex-column {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* A white background with a black border taking up 50% of the screen */

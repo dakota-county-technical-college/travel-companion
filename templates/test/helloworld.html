@@ -1,29 +1,17 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="" content="" />
-    <title>Hello World!</title>
-    <link href="{% static 'css/mainstyles.css' %}" type="text/css" rel="stylesheet" />
-  </head>
+{% extends "base.html" %}
 
-  <body>
-    <div id="content-wrapper">
-      {% if name %}
-      <p>Hello {{ name }}!</p>
-      {% else %}
-      <p>Hello World!</p>
-      {% endif %}
-      {% if form_data %}
-      <p>Destination: {{ form_data.destination }}</p>
-      <p>Start Date: {{ form_data.start_date }}</p>
-      <p>End Date: {{ form_data.end_date }}</p>
-      <p>Number of Travelers: {{ form_data.travelers }}</p>
-      {% else %}
-      <p>No data received.</p>
-      {% endif %}
-    </div>
-    <script></script>
-  </body>
-</html>
+{% block content %}
+  {% if name %}
+    <p>Hello {{ name }}!</p>
+  {% else %}
+    <p>Hello World!</p>
+  {% endif %}
+  {% if form_data %}
+    <p>Destination: {{ form_data.destination }}</p>
+    <p>Start Date: {{ form_data.start_date }}</p>
+    <p>End Date: {{ form_data.end_date }}</p>
+    <p>Number of Travelers: {{ form_data.travelers }}</p>
+  {% else %}
+    <p>No data received.</p>
+  {% endif %}
+{% endblock %}

@@ -1,100 +1,39 @@
-<div class="navbar">
+{% load static %}
+
+<div class="navbar {% if request.resolver_match.url_name != 'home' %}secondary{% endif %}">
     <i class="fa-solid fa-bars fa-2xl"></i>
     {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <!-- Uncomment this if we'll need to add a logout button -->
-        <!-- <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="">Log Out</button>
-        </form> -->
+        {% if request.resolver_match.url_name != 'home' %}
+            <span>
+                <ul>
+                    <li><a href="#" class="btn txt bt1">HOME</a></li>
+                    <li><i class="fa-solid fa-tree"></i></li>
+                    <li><a href="#" class="btn txt bt1">PLAN</a></li>
+                    <li><i class="fa-solid fa-tree"></i></li>
+                    <li><a href="#" class="btn txt bt1">TRIPS</a></li>
+                    <li><i class="fa-solid fa-tree"></i></li>
+                    <li><a href="#" class="btn txt bt1">ITINERARY</a></li>
+                </ul>
+            </span>
+        {% endif %}
+    
+        <span class="flex-row">
+            {% if request.resolver_match.url_name != 'home' %}
+                <div class="flex-column" id="personal-logo">
+                    <img src="{% static 'images/branding/trips-r-us-logo-top.png' %}" alt="Trips-R-Us-Logo-Top">
+                    <h3>Welcome, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!</h3>
+                    <img src="{% static 'images/branding/trips-r-us-logo-bottom.png' %}" alt="Trips-R-Us-Logo-Bottom">
+                </div>
+            {% endif %}
+            <form action="{% url 'logout' %}" method="post" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="btn contained bt2">Log Out</button>
+            </form>
+        </span>
     {% else %}
-        <p>
+        <span>
             <button id="nav-register-button" class="btn txt bt2">Sign Up</button>
             <button id="nav-signin-button" class="btn contained bt1">Log In</button>
-        </p>
+        </span>
     {% endif %}
-</div>
-
-<div id="authModal" class="modal">
-    <div class="modal-background">
-        <div class="modal-box" id="auth-modal">
-            <div class="modal-form sign-up">
-                <form action="{% url 'signup' %}" method="POST">
-                    {% csrf_token %}
-                    <h2>Create Account</h2>
-                    <div class="form-group">
-                        {{ register_form.username }}
-                        {% if register_form.username.errors %}
-                            <div class="error">{{ register_form.username.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ register_form.first_name }}
-                        {% if register_form.first_name.errors %}
-                            <div class="error">{{ register_form.first_name.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ register_form.last_name }}
-                        {% if register_form.last_name.errors %}
-                            <div class="error">{{ register_form.last_name.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ register_form.email }}
-                        {% if register_form.email.errors %}
-                            <div class="error">{{ register_form.email.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ register_form.password1 }}
-                        {% if register_form.password1.errors %}
-                            <div class="error">{{ register_form.password1.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ register_form.password2 }}
-                        {% if register_form.password2.errors %}
-                            <div class="error">{{ register_form.password2.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <button type="submit" class="btn contained bt2">Sign Up</button>
-                </form>
-            </div>
-            <div class="modal-form sign-in">
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-                    <h2>Sign In</h2>
-                    <div class="form-group">
-                        {{ login_form.username }}
-                        {% if login_form.username.errors %}
-                            <div class="error">{{ login_form.username.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ login_form.password }}
-                        {% if login_form.password.errors %}
-                            <div class="error">{{ login_form.password.errors.as_text }}</div>
-                        {% endif %}
-                    </div>
-                    <a href="#">Forgot Your Password?</a>
-                    <button type="submit" class="btn contained bt2">Sign In</button>
-                </form>
-            </div>
-            <div class="modal-toggle-container">
-                <div class="modal-toggle">
-                    <div class="toggle-panel toggle-left">
-                        <h1>Hello Traveler!</h1>
-                        <p>Please register to save your itineraries!</p>
-                        <button class="btn contained bt1" id="login">Sign In</button>
-                    </div>
-                    <div class="toggle-panel toggle-right">
-                        <h1>Welcome back!</h1>
-                        <p>Please enter your details to access your itineraries!</p>
-                        <button class="btn contained bt1" id="register">Sign Up</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
