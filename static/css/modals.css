@@ -29,7 +29,7 @@ default layout, fonts, buttons, etc.
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px;
 }
 
 .modal-box p {
@@ -72,6 +72,10 @@ default layout, fonts, buttons, etc.
     padding: 10px 15px;
     font-size: 13px;
     border-radius: 8px;
+}
+
+.modal-box input::placeholder {
+    font-size: 13px;
 }
 
 .modal-form {
@@ -127,19 +131,17 @@ default layout, fonts, buttons, etc.
     height: 100%;
     overflow: hidden;
     transition: all 0.6s ease-in-out;
-    border-radius: 150px 0 0 100px;
     z-index: 9000;
 }
 
 .modal-box.active .modal-toggle-container {
     transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
 }
 
 .modal-toggle {
     background-color: var(--dark-blue);
     height: 100%;
-    background: linear-gradient(to right, var(--light-blue), var(--dark-blue));
+    background: linear-gradient(to right, rgb(0, 191, 255), var(--dark-blue));
     color: white;
     position: relative;
     left: -100%;
