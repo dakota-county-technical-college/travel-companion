@@ -1,0 +1,107 @@
+/* This style sheet includes rules for all buttons, including text buttons, outlined buttons, and contained buttons as well as their hover, focus. disabled, and focus properties */
+
+/*
+
+Note: All buttons should be assigned the following classes: 
+
+1) btn (the main button class)
+
+2) One of: txt, outlined, or contained (the style of the button)
+
+3) One of bt1 or bt2 (whether the button is primary or secondary)
+
+*/
+
+/* Define styles for buttons in regular state */
+.btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 16px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--primary-text);
+}
+
+.btn.txt {
+    background-color: transparent;
+    border: none;
+}
+
+.btn.outlined {
+    background-color: transparent;
+}
+
+.btn.outlined.bt1 {
+    border: 2px solid var(--yellow);
+}
+
+.btn.outlined.bt2 {
+    border-color: var(--dark-blue);
+}
+
+.btn.contained {
+    border: 2px solid transparent;
+}
+
+.btn.contained {
+    background-color: var(--yellow);
+}
+
+.btn.contained.bt2 {
+    background-color: var(--dark-blue);
+    color: var(--secondary-text);
+}
+
+.btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Define styles for buttons in hover state */
+.btn.txt.bt1:hover,
+.btn.outlined.bt1:hover {
+    background-color: var(--yellow-transparent);
+}
+
+.btn.txt.bt2:hover,
+.btn.outlined.bt2:hover {
+    background-color: var(--dark-blue-transparent);
+}
+
+.btn.contained:hover {
+    background-color: transparent;
+}
+
+.btn.contained.bt1:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.btn.contained.bt2:hover {
+    border-color: var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+/* Define styles for buttons in active / pressed state */
+
+.btn.txt.bt1:active,
+.btn.outlined.bt1:active,
+.btn.contained.bt1:active {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+    color: var(--secondary-text);
+}
+
+.btn.txt.bt2:active,
+.btn.outlined.bt2:active,
+.btn.contained.bt2:active {
+    background-color: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--primary-text);
+}

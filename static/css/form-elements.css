@@ -1,0 +1,139 @@
+/* This style sheet includes rules for global form elements, including text fields, etc. */
+
+form {
+    font-family: sans-serif;
+    font-size: 100%;
+    width: 100%;
+}
+
+.preferences-form {
+    background: #dff8fd;
+    border-radius: 25px;
+    padding: 20px;
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+}
+
+/* Set general styling for form elements */
+
+fieldset {
+    margin: 0px auto 50px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+legend {
+    /*background-color: */
+    color: white;
+    /*font-family: */
+    font-size: 120%;
+    letter-spacing: .1em;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+/* Apply a red asterisk following the labels of required fields */
+.required:after {
+    content: "*";
+    color: red;
+}
+
+/* All text input fields */
+input:not([type=button]):not([type=reset]):not([type=submit]):not([type=image]) {
+    background: #e9fafe;
+    border: none;
+    padding: 10px;
+    width: 100%;
+}
+
+select {
+    font-family: sans-serif;
+    font-size: 100%;
+    letter-spacing: .03em;
+    margin: 8px 0 20px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: white;
+    height: 40px;
+    width: 100%;
+}
+
+input:hover {
+    background-color: #bbd8e3;
+}
+
+input:focus {
+    outline: 5px auto rgba(0, 150, 255, 1);
+    /* This mirrors Google Chrome's default focus outline */
+}
+
+input::placeholder {
+    font-size: 75%;
+}
+
+div.formColumns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+div.formTwoColumn,
+div.formThreeColumn {
+    width: 100%;
+}
+
+.checkbox {
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+input[type=checkbox] {
+    cursor: pointer !important;
+    width: 20px !important;
+    margin: 0 !important;
+}
+
+input {
+    width: 100px;
+}
+
+/* Additional Preference Form Rules */
+.preferences-form .label-and-input {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: end;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    background: #b6f2ff;
+    width: 100%;
+}
+
+.preferences-form label {
+    color: #6e7c82;
+    display: block;
+}
+
+.preferences-form input {
+    width: 100%;
+    outline: none;
+    background-color: #b6f2ff !important;
+}
+
+.preferences-form .label-and-input span {
+    display: flex;
+    align-items: center;
+}
