@@ -24,15 +24,15 @@ Examples of Helper Functions:
 """
 
 
-def load_api_key():
+def load_google_maps_api_key():
     """Loads the API key from an environment variable."""
     load_dotenv()
-    return os.environ.get("API_KEY")
+    return os.environ.get("GOOGLE_MAPS_API_KEY")
 
 
-def initialize_gmaps(api_key):
+def initialize_gmaps(google_maps_api_key):
     """Initializes the Google Maps client with an API key."""
-    return googlemaps.Client(api_key)
+    return googlemaps.Client(google_maps_api_key)
 
 
 def search_places_nearby(gmaps, location, radius=5000, place_type='shopping_mall'):
@@ -72,12 +72,12 @@ def geocode_location(gmaps, location_name):
         return False, f"Could not geocode the location: {location_name}"
 
 
-def process_and_return_places(places, api_key):
+def process_and_return_places(places, google_maps_api_key):
     """_summary_
 
     Args:
         places (list): All the places returned from googles api
-        api_key (str): api key needed to interact with gmaps
+        google_maps_api_key (str): api key needed to interact with gmaps
 
     Returns:
         list of dictinaries: Extracted places. appendied to a list
@@ -99,7 +99,7 @@ def process_and_return_places(places, api_key):
         if photos:
             photo_reference = photos[0].get('photo_reference', '')
             if photo_reference:
-                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_reference}&key={api_key}"
+                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_reference}&key={google_maps_api_key}"
                 activity['photos'] = photo_url
             else:
                 activity['photos'] = ''
@@ -201,7 +201,7 @@ def fetch_places(gmaps, location, total_days):
     return combined_places[:total_activities_needed + total_food_places_needed]
 
 
-def generate_itinerary(gmaps, location, start_date, end_date, api_key):
+def generate_itinerary(gmaps, location, start_date, end_date, google_maps_api_key):
     """_summary_
 
     Args:
@@ -209,14 +209,14 @@ def generate_itinerary(gmaps, location, start_date, end_date, api_key):
         location (tuple): The lat, long of a destination a user would like an itinerary made for
         start_date (datetime.date): start day of the trip
         end_date (datetime.date): end day of the trip
-        api_key (str): the api key needed to use gmaps
+        google_maps_api_key (str): the api key needed to use gmaps
 
     Returns:
         dic: itineraries 
     """
     total_days = calculate_total_days(start_date, end_date)
     combined_places = fetch_places(gmaps, location, total_days)
-    processed_places = process_and_return_places(combined_places, api_key)
+    processed_places = process_and_return_places(combined_places, google_maps_api_key)
 
     # Distribute places across days
     itinerary = distribute_places_to_days(start_date, end_date, processed_places)
@@ -262,17 +262,17 @@ def get_recommendation(destination, start_date, end_date):
     Returns:
         _type_: _description_
     """
-    api_key = load_api_key()
-    if not api_key:
+    google_maps_api_key = load_google_maps_api_key()
+    if not google_maps_api_key:
         return False, "API key is not set. Please check your .env file."
 
-    gmaps = initialize_gmaps(api_key)
+    gmaps = initialize_gmaps(google_maps_api_key)
     success, location_or_error = geocode_location(gmaps, destination)
     if not success:
         return False, location_or_error  # Ensure returning a tuple
 
     location = location_or_error
-    itinerary = generate_itinerary(gmaps, location, start_date, end_date, api_key)
+    itinerary = generate_itinerary(gmaps, location, start_date, end_date, google_maps_api_key)
 
     # Check if the itinerary has entries; if not, return a message indicating no places were found
     if not itinerary:
