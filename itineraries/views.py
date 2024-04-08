@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required
 from .forms import PreferencesForm
 from .models import PreferencesFormResponse
 from .forms import UserRegistrationForm
-
+from utils import helpers
+from .models import Activity
 
 def index(request):
+    context = {}
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
         if form.is_valid():
@@ -17,7 +19,22 @@ def index(request):
                 travelers=form.cleaned_data['travelers']
             )
             form_response.save()
-            return redirect('hello')
+            
+            destination = form.cleaned_data['destination']
+            start_date = form.cleaned_data['start_date']
+            end_date = form.cleaned_data['end_date']
+            success, recommended_places_or_message = helpers.get_recommendation(destination, start_date, end_date)
+            # print(recommended_places_or_message)
+            if not success:
+            # In case of failure, recommended_places_or_message contains the error message.
+                context['error'] = recommended_places_or_message
+            else:
+                # If successful, pass the structured itinerary to the context
+                context['itinerary'] = recommended_places_or_message
+                context['start_date'] = start_date
+                context['end_date'] = end_date
+
+        return render(request, 'test/searchresults.html', context)
     else:
         form = PreferencesForm()
     return render(request, 'index.html', {'form': form})
@@ -81,3 +98,42 @@ def logout_view(request):
 # Definition for the experiemental map embed page.
 def map(request):
     return render(request, 'test/map.html')
+
+def add_activity(request):
+    if request.method == 'POST':
+        print("In POST addactivity")
+        
+        # Retrieve all the form data from the POST request
+        title = request.POST.get('title', '')
+        editSummary = request.POST.get('editSummary', '')
+        name = request.POST.get('name', '')
+        address = request.POST.get('address', '')
+        placeID = request.POST.get('placeID', '')
+        photos = request.POST.get('photos', '')
+        openHour = request.POST.get('openHour', '')
+        rating = request.POST.get('rating', '')
+        location = request.POST.get('location', '')
+        urlLink = request.POST.get('urlLink', '')
+        # Additional fields like northeast, southwest, website can be added similarly
+        
+        # Log retrieved data for verification (optional, remove in production)
+        # print(f"Name: {name}, Address: {address}, Rating: {rating}, Location: {location}")
+
+        # Proceed to save this data to your model
+        new_activity = Activity(
+            title=title,
+            editSummary=editSummary,
+            name=name,
+            address=address,
+            placeID=placeID,
+            photos=photos,
+            openHour=openHour,
+            rating=rating,
+            location=location,
+            urlLink=urlLink,
+            # Include other fields as needed
+        )
+        new_activity.save()
+        # Redirect or render a response as needed
+
+        return render(request, 'test/addactivity.html')
