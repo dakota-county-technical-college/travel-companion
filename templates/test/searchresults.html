@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>search_results</title>
+  </head>
+  <body>
+    <h1>Recommended Places Page</h1>
+    {% if itinerary %}
+    <div class="itinerary-results">
+        {% for date, details in itinerary.items %}
+            <div class="day">
+                <h2>{{ date }}</h2>
+                <div class="places">
+                    {% for place in details.places %}
+                        <div class="place">
+                            <h3>{{ place.title }}</h3>
+                            <p>{{ place.editSummary }}</p>
+                            <img src="{{ place.photos }}" alt="Photo of {{ place.name }}">
+                            <!-- add more fields as needed -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+    
+  
+    
+  </body>
+</html>
