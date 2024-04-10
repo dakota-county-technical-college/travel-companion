@@ -12,8 +12,9 @@ Examples of Helper Functions:
 import googlemaps
 from dotenv import load_dotenv
 import os
-from datetime import timedelta
+from datetime import datetime, timedelta, time
 from random import shuffle
+from itineraries.models import Itinerary, Day, Activity
 
 """
 Examples of Helper Functions:
@@ -260,7 +261,7 @@ def get_recommendation(destination, start_date, end_date):
         end_date (datetime.date): end date of the trip
 
     Returns:
-        _type_: _description_
+        dict: activities for making up the itinerary
     """
     google_maps_api_key = load_google_maps_api_key()
     if not google_maps_api_key:
@@ -279,3 +280,74 @@ def get_recommendation(destination, start_date, end_date):
         return False, "No places found for the given dates. Please try different dates or another destination."
 
     return True, itinerary
+
+
+def save_itinerary(user, destination, start_date, end_date, travelers, activities_data):
+    # Step 1: Save itinerary
+    new_itinerary = Itinerary(
+        user=user,
+        title=f"My Trip to {destination}",
+        destination=destination,
+        start_date=start_date,
+        end_date=end_date,
+        description=f"A trip to {destination} with {travelers} travelers.",
+        num_travelers=travelers
+    )
+    new_itinerary.save()
+
+    # Get number of days for the trip
+    num_days = (end_date - start_date).days + 1
+    # Activities start at 8 am each day
+    initial_start_time = time(8, 0)
+
+    # Step 2: Save each day and its activities
+    for day_index in range(num_days):
+        current_date = start_date + timedelta(days=day_index)
+
+        activities_for_day = activities_data.get(current_date, {}).get('places', [])
+
+        # Save the day
+        new_day = Day(
+            itinerary=new_itinerary,
+            date=current_date,
+            day_number=day_index + 1
+        )
+        new_day.save()
+
+        # Reset start time for each day
+        start_time = initial_start_time
+
+        # Step 3: Save activities for the day
+        for activity_data in activities_for_day:
+            save_activity(new_day, activity_data, start_time)
+
+
+def save_activity(day, activity_data, start_time):
+    # setting activities 2 hours 30 mins apart
+    duration = timedelta(hours=2, minutes=30)
+    end_time = (datetime.combine(datetime.today(), start_time) + duration).time()
+
+    # Create and save an Activity instance
+    new_activity = Activity(
+        day=day,
+        title=activity_data.get('title', ''),
+        start_time=start_time,
+        end_time=end_time,
+        editSummary=activity_data.get('editSummary', ''),
+        name=activity_data.get('name', ''),
+        address=activity_data.get('address', ''),
+        placeID=activity_data.get('placeID', ''),
+        photos=activity_data.get('photos', ''),
+        openHour=activity_data.get('openHour', ''),
+        periods=activity_data.get('periods', ''),
+        businessStatus=activity_data.get('businessStatus', ''),
+        rating=activity_data.get('rating', ''),
+        urlLink=activity_data.get('urlLink', ''),
+        location=activity_data.get('location', ''),
+        northeast=activity_data.get('northeast', ''),
+        southwest=activity_data.get('southwest', ''),
+        website=activity_data.get('website', ''),
+    )
+    new_activity.save()
+
+    return end_time
