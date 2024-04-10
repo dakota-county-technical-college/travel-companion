@@ -8,6 +8,15 @@ from utils import helpers
 
 
 def index(request):
+    """
+    The controller
+
+    Args:
+        request (WSGIRequest):
+
+    Returns:
+        if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
+    """
     context = {}
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
@@ -57,13 +66,17 @@ def authorized(request):
     return render(request, 'auth/authorized.html')
 
 
-"""
-Registers a new user and redirects to the home page.
-When a new user submits registration information, it's saved to the database, and then the user is redirected to the home page.
-"""
-
-
 def signup(request):
+    """
+    Registers a new user and redirects to the home page.
+    When a new user submits registration information, it's saved to the database, and then the user is redirected to the home page.
+
+    Args:
+        request (WSGIRequest request): request with fields to sign up/ register a user
+
+    Returns:
+        home page with the context that the user is logged in
+    """
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -74,13 +87,17 @@ def signup(request):
     return render(request, 'home', {'form': form})
 
 
-"""
-Logs in a user and redirects to the home page.
-When a user submits login credentials, it checks if the provided username and password are valid. If they are, the user is logged in and redirected to the home page.
-"""
-
-
 def login_view(request):
+    """
+    Logs in a user and redirects to the home page.
+    When a user submits login credentials, it checks if the provided username and password are valid. If they are, the user is logged in and redirected to the home page.
+
+    Args:
+        request (WSGIRequest): request to log out
+
+    Returns:
+        home page
+    """
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -94,6 +111,15 @@ def login_view(request):
 
 
 def logout_view(request):
+    """
+    Logs User Out
+
+    Args:
+        request (POST request): request to log out
+
+    Returns:
+        home page
+    """
     logout(request)
     return redirect('home')
 

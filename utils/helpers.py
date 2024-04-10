@@ -283,6 +283,16 @@ def get_recommendation(destination, start_date, end_date):
 
 
 def save_itinerary(user, destination, start_date, end_date, travelers, activities_data):
+    """_summary_
+
+    Args:
+        user (UserObject): Signed in user object
+        destination (str): name of the destination
+        start_date (date): when the trip begins
+        end_date (date): when the trip ends
+        travelers (int): number of party
+        activities_data (dict): activities recommended for the itinerary
+    """
     # Step 1: Save itinerary
     new_itinerary = Itinerary(
         user=user,
@@ -323,6 +333,16 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
 
 
 def save_activity(day, activity_data, start_time):
+    """_summary_
+
+    Args:
+        day (day): The specific day
+        activity_data (dic): activities set for the day
+        start_time (datetime): when activity begins
+
+    Returns:
+        datetime: when the activity ends
+    """
     # setting activities 2 hours 30 mins apart
     duration = timedelta(hours=2, minutes=30)
     end_time = (datetime.combine(datetime.today(), start_time) + duration).time()
