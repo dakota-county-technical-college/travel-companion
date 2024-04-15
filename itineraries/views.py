@@ -5,30 +5,41 @@ from .forms import PreferencesForm
 from .models import PreferencesFormResponse
 from .forms import UserRegistrationForm
 from utils import helpers
-from .models import Activity
+
 
 def index(request):
+    """
+    The controller
+
+    Args:
+        request (WSGIRequest):
+
+    Returns:
+        if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
+    """
     context = {}
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
         if form.is_valid():
-            form_response = PreferencesFormResponse(
-                destination=form.cleaned_data['destination'],
-                start_date=form.cleaned_data['start_date'],
-                end_date=form.cleaned_data['end_date'],
-                travelers=form.cleaned_data['travelers']
-            )
-            form_response.save()
-            
+            # Extract cleaned data itinerary data
             destination = form.cleaned_data['destination']
             start_date = form.cleaned_data['start_date']
             end_date = form.cleaned_data['end_date']
+            travelers = form.cleaned_data['travelers']
+
             success, recommended_places_or_message = helpers.get_recommendation(destination, start_date, end_date)
-            # print(recommended_places_or_message)
+
             if not success:
-            # In case of failure, recommended_places_or_message contains the error message.
+                # In case of failure, recommended_places_or_message contains the error message.
                 context['error'] = recommended_places_or_message
             else:
+                # Check if user is authenticated
+                if request.user.is_authenticated:
+                    user = request.user
+                else:
+                    user = None
+                itinerary_id = helpers.save_itinerary(user, destination, start_date, end_date, travelers,
+                                                      recommended_places_or_message)
                 # If successful, pass the structured itinerary to the context
                 context['itinerary'] = recommended_places_or_message
                 context['start_date'] = start_date
@@ -54,13 +65,17 @@ def authorized(request):
     return render(request, 'auth/authorized.html')
 
 
-"""
-Registers a new user and redirects to the home page.
-When a new user submits registration information, it's saved to the database, and then the user is redirected to the home page.
-"""
-
-
 def signup(request):
+    """
+    Registers a new user and redirects to the home page.
+    When a new user submits registration information, it's saved to the database, and then the user is redirected to the home page.
+
+    Args:
+        request (WSGIRequest request): request with fields to sign up/ register a user
+
+    Returns:
+        home page with the context that the user is logged in
+    """
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -71,13 +86,17 @@ def signup(request):
     return render(request, 'home', {'form': form})
 
 
-"""
-Logs in a user and redirects to the home page.
-When a user submits login credentials, it checks if the provided username and password are valid. If they are, the user is logged in and redirected to the home page.
-"""
-
-
 def login_view(request):
+    """
+    Logs in a user and redirects to the home page.
+    When a user submits login credentials, it checks if the provided username and password are valid. If they are, the user is logged in and redirected to the home page.
+
+    Args:
+        request (WSGIRequest): request to log out
+
+    Returns:
+        home page
+    """
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -91,6 +110,15 @@ def login_view(request):
 
 
 def logout_view(request):
+    """
+    Logs User Out
+
+    Args:
+        request (POST request): request to log out
+
+    Returns:
+        home page
+    """
     logout(request)
     return redirect('home')
 
@@ -98,42 +126,3 @@ def logout_view(request):
 # Definition for the experiemental map embed page.
 def map(request):
     return render(request, 'test/map.html')
-
-def add_activity(request):
-    if request.method == 'POST':
-        print("In POST addactivity")
-        
-        # Retrieve all the form data from the POST request
-        title = request.POST.get('title', '')
-        editSummary = request.POST.get('editSummary', '')
-        name = request.POST.get('name', '')
-        address = request.POST.get('address', '')
-        placeID = request.POST.get('placeID', '')
-        photos = request.POST.get('photos', '')
-        openHour = request.POST.get('openHour', '')
-        rating = request.POST.get('rating', '')
-        location = request.POST.get('location', '')
-        urlLink = request.POST.get('urlLink', '')
-        # Additional fields like northeast, southwest, website can be added similarly
-        
-        # Log retrieved data for verification (optional, remove in production)
-        # print(f"Name: {name}, Address: {address}, Rating: {rating}, Location: {location}")
-
-        # Proceed to save this data to your model
-        new_activity = Activity(
-            title=title,
-            editSummary=editSummary,
-            name=name,
-            address=address,
-            placeID=placeID,
-            photos=photos,
-            openHour=openHour,
-            rating=rating,
-            location=location,
-            urlLink=urlLink,
-            # Include other fields as needed
-        )
-        new_activity.save()
-        # Redirect or render a response as needed
-
-        return render(request, 'test/addactivity.html')
