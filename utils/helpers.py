@@ -306,7 +306,7 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
     new_itinerary.save()
 
     # Get number of days for the trip
-    num_days = (end_date - start_date).days + 1
+    num_days = calculate_total_days(start_date, end_date)
     # Activities start at 8 am each day
     initial_start_time = time(8, 0)
 

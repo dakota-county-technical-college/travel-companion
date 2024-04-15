@@ -40,7 +40,6 @@ def index(request):
                     user = None
                 itinerary_id = helpers.save_itinerary(user, destination, start_date, end_date, travelers,
                                                       recommended_places_or_message)
-                print(itinerary_id)
                 # If successful, pass the structured itinerary to the context
                 context['itinerary'] = recommended_places_or_message
                 context['start_date'] = start_date
