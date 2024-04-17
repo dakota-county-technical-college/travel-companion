@@ -11,3 +11,16 @@
 #personal-logo img {
     width: 100%;
 }
+
+.activity-card-media {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5; /* Adjusted to span 4 rows */
+    width: 100%;
+    height: auto;
+}
+  
+.activity-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
