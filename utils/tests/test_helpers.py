@@ -193,7 +193,7 @@ def test_calculate_total_days():
     test_cases = [
         (date(2024, 1, 1), date(2024, 1, 1), 1),  # Same day
         (date(2024, 1, 1), date(2024, 1, 2), 2),  # Two consecutive days
-        (date(2024, 1, 1), date(2024, 1, 10), 9),  # Ten days span
+        (date(2024, 1, 1), date(2024, 1, 10), 10),  # Ten days span
         (date(2023, 12, 25), date(2024, 1, 1), 8)  # Cross-year span
     ]
 
