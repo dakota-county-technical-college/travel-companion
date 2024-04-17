@@ -153,6 +153,25 @@ hr {
     max-width: 500px;
 }
 
+
+/* Activity cards */
+.activity-card {
+    display: grid;
+    grid-template-columns: minmax(34%, 34%) minmax(40%, 40%) minmax(20%, 26%);
+    grid-template-rows: auto auto auto auto; /* Adjusted to 4 rows */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    max-width: 50vw;
+    background-color: #F8F7F5; /*TODO Revise color with the root */
+}
+
+.activity-card-content {
+    grid-column: 2 / 4; /* Adjusted to span columns 2 and 3 */
+    padding: 0px 20px 0px 20px;
+}
+
+
 /* Special rules for lower breakpoints (not including mobile devices) */
 @media (max-width: 820px) {
 
@@ -162,3 +181,4 @@ hr {
         padding: 0 0 20px;
     }
 }
+
