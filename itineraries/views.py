@@ -44,8 +44,9 @@ def index(request):
                 context['itinerary'] = recommended_places_or_message
                 context['start_date'] = start_date
                 context['end_date'] = end_date
+                context['destination'] = destination
 
-        return render(request, 'test/searchresults.html', context)
+        return render(request, 'itinerary.html', context)
     else:
         form = PreferencesForm()
     return render(request, 'index.html', {'form': form})

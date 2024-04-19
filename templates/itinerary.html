@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if context %}
+        Itinerary | {{ itinerary.title }}
+    {% else %}
+        Error
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+    {% if context %}
+        <p>There is an itinerary!</p>
+    {% else %}
+        <p>Itinerary was not generated.</p>
+    {% endif %}
+{% endblock %}
