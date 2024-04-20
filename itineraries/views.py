@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import PreferencesForm
-from .models import PreferencesFormResponse
-from .forms import UserRegistrationForm
+from django.urls import reverse
+from .models import Activity, Itinerary, PreferencesFormResponse
+from .forms import PreferencesForm, UserRegistrationForm
 from utils import helpers
 
 
@@ -20,6 +20,7 @@ def index(request):
     context = {}
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
+        
         if form.is_valid():
             # Extract cleaned data itinerary data
             destination = form.cleaned_data['destination']
@@ -46,10 +47,26 @@ def index(request):
                 context['end_date'] = end_date
                 context['destination'] = destination
 
-        return render(request, 'itinerary.html', context)
+                return redirect(reverse('itinerary', args=[itinerary_id]))
     else:
         form = PreferencesForm()
     return render(request, 'index.html', {'form': form})
+
+def itinerary(request, itinerary_id):
+    """
+    The controller
+
+    Args:
+        request (WSGIRequest):
+        itinerary_id (int): The ID of the itinerary.
+
+    Returns:
+        if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
+    """
+    itinerary = Itinerary.objects.get(id=itinerary_id)
+    days = itinerary.days.all()
+    activities = Activity.objects.filter(day__in=days)
+    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities})
 
 
 def hello_world(request):

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {% if context %}
+    {% if itinerary %}
         Itinerary | {{ itinerary.title }}
     {% else %}
         Error
@@ -11,9 +11,24 @@
 
 
 {% block content %}
-    {% if context %}
-        <p>There is an itinerary!</p>
+    {% if itinerary %}
+        <section class="itinerary-wrapper">
+            <h1 id="itinerary-title">{{ itinerary.title }}</h1>
+            {% for day in itinerary.days.all %}
+                <div class="itinerary-day">
+                    <div class="itinerary-day-left-column">
+                        <h2 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h2>
+                        {% for activity in day.activity_set.all %}
+                            {% include 'components/activity-card.html' %}
+                        {% endfor %}
+                    </div>
+                    <div class="itinerary-day-right-column">
+                        <img src="{% static 'images/illustrations/map-placeholder.png' %}" alt="Map of Day {{ day.day_number }} Actvities">
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
     {% else %}
-        <p>Itinerary was not generated.</p>
+        <p>Itinerary could not be found. Please try again later.</p>
     {% endif %}
 {% endblock %}

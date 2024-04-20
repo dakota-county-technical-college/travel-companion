@@ -153,6 +153,20 @@ hr {
     max-width: 500px;
 }
 
+/* Itinerary Page */
+.itinerary-wrapper {
+    padding: 0 30px 30px;
+}
+
+.itinerary-day {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: stretch;
+    gap: 50px;
+    margin-bottom: 70px;
+}
 
 /* Activity cards */
 .activity-card {
@@ -181,4 +195,3 @@ hr {
         padding: 0 0 20px;
     }
 }
-
