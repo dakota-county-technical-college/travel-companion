@@ -185,6 +185,16 @@ hr {
     padding: 0px 20px 0px 20px;
 }
 
+/* Itinerary cards */
+.carousel {
+    display: flex;
+    /* Use flexbox for horizontal layout */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    gap: 20px;
+    /* Add space between cards */
+}
+
 
 /* Special rules for lower breakpoints (not including mobile devices) */
 @media (max-width: 820px) {

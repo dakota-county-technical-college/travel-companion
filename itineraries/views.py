@@ -54,8 +54,6 @@ def index(request):
 
 def itinerary(request, itinerary_id):
     """
-    The controller
-
     Args:
         request (WSGIRequest):
         itinerary_id (int): The ID of the itinerary.
@@ -66,7 +64,33 @@ def itinerary(request, itinerary_id):
     itinerary = Itinerary.objects.get(id=itinerary_id)
     days = itinerary.days.all()
     activities = Activity.objects.filter(day__in=days)
+    # TODO: Only show the itinerary if the user is the owner of the itinerary, otherwise redirect to the home page.
     return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities})
+
+
+def trips(request):
+    """
+    Args:
+        request (WSGIRequest)
+    
+    Returns:
+        if user is logged in, this endpoint will return a page with the user's trips
+    """
+
+    if request.user.is_authenticated:
+        user = request.user
+        itineraries = Itinerary.objects.filter(user=user).order_by('-start_date')
+        if itineraries:
+            activities = []
+            for itinerary in itineraries:
+                first_day = itinerary.days.first()
+                first_activity = first_day.activity_set.first()
+                activities.append(first_activity)
+            return render(request, 'trips.html', {'itineraries': zip(itineraries, activities)})
+        else:
+            return render(request, 'trips.html', {'itineraries': itineraries})
+    else:
+        return redirect('home')
 
 
 def hello_world(request):
