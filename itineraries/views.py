@@ -126,3 +126,6 @@ def logout_view(request):
 # Definition for the experiemental map embed page.
 def map(request):
     return render(request, 'test/map.html')
+
+def profile (request):
+    return render (request, 'profile.html')

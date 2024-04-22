@@ -1,0 +1,36 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+max-width: 800px;
+margin: 100px auto;
+display: flex;
+flex-wrap: wrap;
+gap: 20px;   
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+padding: 20px;
+}
+.panel {
+flex: 1 1 300px; /* Flex property to make panels equal width */
+padding: 20px;
+background-color: #f9f9f9;
+border-radius: 8px;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+h2 {
+margin-top: 10px;
+}
+
+#btn {
+position: absolute;
+color: #669999;
+top: 50px; /* 50px away from the top */
+left: 50px; /* 50px away from the left */
+font-size: 1.2rem;
+line-height: 5px;
+}

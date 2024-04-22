@@ -1,7 +1,9 @@
 {% load static %}
 
 <div class="navbar {% if request.resolver_match.url_name != 'home' %}secondary{% endif %}">
-    <i class="fa-solid fa-bars fa-2xl"></i>
+    <div class="sidebar">
+    <i class="fa-solid fa-bars fa-2xl" id="menu-icon"></i>
+    </div>
     {% if user.is_authenticated %}
         {% if request.resolver_match.url_name != 'home' %}
             <span>
