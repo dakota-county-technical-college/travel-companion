@@ -12,7 +12,7 @@ designated style sheets.
 @import url('modals.css');
 @import url('form-elements.css');
 
-/* Set base CSS properties as constants */
+/* Set base SCSS properties as constants */
 :root {
     --primary-text: rgba(0, 0, 0, 1);
     --secondary-text: rgba(255, 255, 255, 1);
