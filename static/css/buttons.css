@@ -17,8 +17,6 @@ Note: All buttons should be assigned the following classes:
     display: inline-block;
     margin: 5px;
     padding: 10px 16px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 16px;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
@@ -27,11 +25,24 @@ Note: All buttons should be assigned the following classes:
     color: var(--primary-text);
 }
 
+/* Styles for Text buttons */
 .btn.txt {
     background-color: transparent;
     border: none;
 }
 
+.btn.txt.bt1 {
+    background-color: transparent;
+    border: none;
+    color: var(--orange);
+}
+.btn.txt.bt2 {
+    background-color: transparent;
+    border: none;
+    color: var(--dark-blue);
+}
+
+/* Styles for outlined buttons */
 .btn.outlined {
     background-color: transparent;
 }
@@ -44,11 +55,13 @@ Note: All buttons should be assigned the following classes:
     border-color: var(--dark-blue);
 }
 
+
+/* Styles for contained buttons */
 .btn.contained {
     border: 2px solid transparent;
 }
 
-.btn.contained {
+.btn.contained.bt1 {
     background-color: var(--yellow);
 }
 
@@ -57,6 +70,7 @@ Note: All buttons should be assigned the following classes:
     color: var(--secondary-text);
 }
 
+/* Styles for diabled button */
 .btn.disabled {
     cursor: not-allowed;
     opacity: 0.5;
