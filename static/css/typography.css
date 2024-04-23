@@ -130,6 +130,16 @@ p.error {
     font-size: 14px;
 }
 
+/* Itinerary Page */
+#itinerary-title {
+    color: var(--orange);
+    font-size: 40px;
+}
+
+.itinerary-day-title {
+    font-size: 25px;
+}
+
 /* Activity card typography */ 
 .activity-card-header {
     font-family: 'Poppins', sans-serif;

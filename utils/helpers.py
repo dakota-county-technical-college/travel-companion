@@ -292,6 +292,9 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
         end_date (date): when the trip ends
         travelers (int): number of party
         activities_data (dict): activities recommended for the itinerary
+
+    Returns:
+    Itinerary ID
     """
     # Step 1: Save itinerary
     new_itinerary = Itinerary(
@@ -330,6 +333,8 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
         # Step 3: Save activities for the day
         for activity_data in activities_for_day:
             save_activity(new_day, activity_data, start_time)
+    
+    return new_itinerary.id
 
 
 def save_activity(day, activity_data, start_time):
