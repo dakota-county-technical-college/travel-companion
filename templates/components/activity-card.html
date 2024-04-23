@@ -3,11 +3,11 @@
     <div class="activity-card-media">
       <img src="{{ activity.photos }}" alt="Photo of {{ activity.name }}">
     </div>
-    <div class="activity-card-header">{{ activity.name }}</div>
+    <h4 class="activity-card-activity">{{ activity.name }}</h4>
     <div class="activity-card-content">
-        <p class="location">{{ actvity.address }}</p>
-        <div class="description">{{ activity.editSummary }}</div>
-      </div>
-      <div class="time">{{ activity.start_time }} - {{activity.end_time}} </div>
+        <h5 class="activity-card-address">{{ actvity.address }}</h5>
+        <p class="activity-card-description">{{ activity.editSummary }}</p>
+    </div>
+    <div class="time">{{ activity.start_time }} - {{activity.end_time}} </div>
     <a href="{{activity.website }}" class="button">Visit Website</a>
   </div>
