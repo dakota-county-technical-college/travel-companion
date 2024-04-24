@@ -153,6 +153,20 @@ hr {
     max-width: 500px;
 }
 
+/* Itinerary Page */
+.itinerary-wrapper {
+    padding: 0 30px 30px;
+}
+
+.itinerary-day {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: stretch;
+    gap: 50px;
+    margin-bottom: 70px;
+}
 
 /* Activity cards */
 .activity-card {
@@ -171,6 +185,27 @@ hr {
     padding: 0px 20px 0px 20px;
 }
 
+/* Itinerary-cards */
+.itinerary-card {
+    flex: 0 0 auto; /* Allow cards to shrink if needed */
+    width: 300px; /* Set a fixed width for cards */
+    background-color: #F8F7F5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+itinerary-card-content {
+    padding: 20px; /* Add padding to the content area */
+}
+
+.carousel {
+    display: flex;
+    /* Use flexbox for horizontal layout */
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    gap: 20px;
+    /* Add space between cards */
+}
 
 /* Special rules for lower breakpoints (not including mobile devices) */
 @media (max-width: 820px) {
@@ -181,4 +216,3 @@ hr {
         padding: 0 0 20px;
     }
 }
-

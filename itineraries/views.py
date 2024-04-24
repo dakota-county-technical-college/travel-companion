@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import PreferencesForm
-from .models import PreferencesFormResponse
-from .forms import UserRegistrationForm
+from django.urls import reverse
+from .models import Activity, Itinerary, PreferencesFormResponse
+from .forms import PreferencesForm, UserRegistrationForm
 from utils import helpers
 
 
@@ -20,6 +20,7 @@ def index(request):
     context = {}
     if request.method == 'POST':
         form = PreferencesForm(request.POST)
+        
         if form.is_valid():
             # Extract cleaned data itinerary data
             destination = form.cleaned_data['destination']
@@ -44,11 +45,52 @@ def index(request):
                 context['itinerary'] = recommended_places_or_message
                 context['start_date'] = start_date
                 context['end_date'] = end_date
+                context['destination'] = destination
 
-        return render(request, 'test/searchresults.html', context)
+                return redirect(reverse('itinerary', args=[itinerary_id]))
     else:
         form = PreferencesForm()
     return render(request, 'index.html', {'form': form})
+
+def itinerary(request, itinerary_id):
+    """
+    Args:
+        request (WSGIRequest):
+        itinerary_id (int): The ID of the itinerary.
+
+    Returns:
+        if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
+    """
+    itinerary = Itinerary.objects.get(id=itinerary_id)
+    days = itinerary.days.all()
+    activities = Activity.objects.filter(day__in=days)
+    # TODO: Only show the itinerary if the user is the owner of the itinerary, otherwise redirect to the home page.
+    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities})
+
+
+def trips(request):
+    """
+    Args:
+        request (WSGIRequest)
+    
+    Returns:
+        if user is logged in, this endpoint will return a page with the user's trips
+    """
+
+    if request.user.is_authenticated:
+        user = request.user
+        itineraries = Itinerary.objects.filter(user=user).order_by('-start_date')
+        if itineraries:
+            activities = []
+            for itinerary in itineraries:
+                first_day = itinerary.days.first()
+                first_activity = first_day.activity_set.first()
+                activities.append(first_activity)
+            return render(request, 'trips.html', {'itineraries': zip(itineraries, activities)})
+        else:
+            return render(request, 'trips.html', {'itineraries': itineraries})
+    else:
+        return redirect('home')
 
 
 def hello_world(request):

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ user.first_name}}'s Trips
+{% endblock %}
+
+{% block content %}
+    {% if itineraries %}
+        <section class="itinerary-wrapper">
+            <h1 id="itinerary-title">Discover you expidition archive...</h1>
+            <div class="carousel">
+                {% for itinerary, activity in itineraries %}
+                    {% include 'components/itinerary-card.html' %}
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <p>No itineraries found for this user. Please add a trip and try again later.</p>
+    {% endif %}
+{% endblock %}
