@@ -149,9 +149,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return JsonResponse({'success': True})
         else:
-            return redirect('home')
+            return JsonResponse({'success': False, 'errors': 'Invalid credentials. Please try again.'})
     return render(request, 'home.html')
 
 

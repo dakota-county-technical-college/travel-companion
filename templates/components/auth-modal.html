@@ -30,21 +30,16 @@
             </form>
         </div>
         <div class="modal-form sign-in">
-            <form action="{% url 'login' %}" method="POST">
+            <form id="login-form" action="{% url 'login' %}" data-url="{% url 'login' %}" method="POST">
                 {% csrf_token %}
                 <h2>Sign In</h2>
                 <div class="form-group">
                     {{ login_form.username }}
-                    {% if login_form.username.errors %}
-                        <div class="error">{{ login_form.username.errors.as_text }}</div>
-                    {% endif %}
                 </div>
                 <div class="form-group">
                     {{ login_form.password }}
-                    {% if login_form.password.errors %}
-                        <div class="error">{{ login_form.password.errors.as_text }}</div>
-                    {% endif %}
                 </div>
+                <div id="id_login_error" class="error"></div>
                 <a href="#">Forgot Your Password?</a>
                 <button type="submit" class="btn contained bt2">Sign In</button>
             </form>
