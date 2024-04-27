@@ -1,44 +1,30 @@
 <div id="authModal" class="modal">
     <div class="modal-box" id="auth-modal">
         <div class="modal-form sign-up">
-            <form action="{% url 'signup' %}" method="POST">
+            <form id="signup-form" action="{% url 'signup' %}" data-url="{% url 'signup' %}" method="POST">
                 {% csrf_token %}
                 <h2>Create Account</h2>
                 <div class="form-group">
                     {{ register_form.username }}
-                    {% if register_form.username.errors %}
-                        <div class="error">{{ register_form.username.errors.as_text }}</div>
-                    {% endif %}
+                    <div id="id_username_error" class="error"></div>
                 </div>
                 <div class="form-group">
                     {{ register_form.first_name }}
-                    {% if register_form.first_name.errors %}
-                        <div class="error">{{ register_form.first_name.errors.as_text }}</div>
-                    {% endif %}
                 </div>
                 <div class="form-group">
                     {{ register_form.last_name }}
-                    {% if register_form.last_name.errors %}
-                        <div class="error">{{ register_form.last_name.errors.as_text }}</div>
-                    {% endif %}
                 </div>
                 <div class="form-group">
                     {{ register_form.email }}
-                    {% if register_form.email.errors %}
-                        <div class="error">{{ register_form.email.errors.as_text }}</div>
-                    {% endif %}
+                    <div id="id_email_error" class="error"></div>
                 </div>
                 <div class="form-group">
                     {{ register_form.password1 }}
-                    {% if register_form.password1.errors %}
-                        <div class="error">{{ register_form.password1.errors.as_text }}</div>
-                    {% endif %}
+                    <div id="id_password1_error" class="error"></div>
                 </div>
                 <div class="form-group">
                     {{ register_form.password2 }}
-                    {% if register_form.password2.errors %}
-                        <div class="error">{{ register_form.password2.errors.as_text }}</div>
-                    {% endif %}
+                    <div id="id_password2_error" class="error"></div>
                 </div>
                 <button type="submit" class="btn contained bt2">Sign Up</button>
             </form>

@@ -43,5 +43,30 @@ $(document).ready(function() {
             $modal.hide();
         }
     });
+
+    /* AJAX signup script to display form errors without reloading the page */
+    $('#signup-form').on('submit', function(e) {
+        e.preventDefault();
+        let url = $(this).data('url');
+        console.log('Signup form submitted.');
+        console.log('Beginning AJAX request.');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    $('#id_username_error').text(data.errors.username);
+                    $('#id_email_error').text(data.errors.email);
+                    $('#id_password1_error').text(data.errors.password1);
+                    $("#id_password2_error").text(data.errors.password2);
+                }
+            },
+        })
+    });
+
 });
 

@@ -123,10 +123,8 @@ h2.bold {
     font-weight: 700;
 }
 
-
-p.error {
+.error {
     color: red;
-    display: none;
     font-size: 14px;
 }
 

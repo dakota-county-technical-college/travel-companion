@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -123,10 +124,12 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log in the user after registration
-            return redirect('home')
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = UserRegistrationForm()
-    return render(request, 'home', {'form': form})
+    return render(request, 'index.html', {'form': form})
 
 
 def login_view(request):
