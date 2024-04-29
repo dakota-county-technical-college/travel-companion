@@ -85,7 +85,7 @@ p {
   /* Button */
 .button {
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 1.25px;
     text-transform: uppercase;
@@ -128,6 +128,11 @@ h2.bold {
     font-size: 14px;
 }
 
+/* Personal Logo Color */
+.personal-logo {
+    color: var(--orange);
+}
+
 /* Itinerary Page */
 #itinerary-title {
     color: var(--orange);
@@ -139,13 +144,28 @@ h2.bold {
 }
 
 /* Activity card typography */ 
-.activity-card-header {
+.activity-card-activity {
+    color: var(--orange);
     font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
     font-weight: 500;
     margin-bottom: 10px;
-    color: #BF6A0F;
     padding: 20px 20px 0px 20px;
+}
+
+.activity-card-time {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.activity-card-button {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
 }
 
 /* Used to convert any text to white when used on a dark colored background */
