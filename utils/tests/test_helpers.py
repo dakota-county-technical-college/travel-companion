@@ -2,7 +2,8 @@ import pytest
 from unittest.mock import patch, Mock
 from datetime import datetime, date, time, timedelta
 from itineraries.models import Activity, Day, Itinerary
-from utils.helpers import distribute_places_to_days, fetch_places, generate_itinerary, load_google_maps_api_key, \
+from utils.helpers import distribute_places_to_days, fetch_places, generate_itinerary, get_place_details, \
+    load_google_maps_api_key, \
     initialize_gmaps, process_and_return_places, save_activity, save_itinerary, search_places_nearby, \
     calculate_total_days, geocode_location, get_recommendation
 from django.contrib.auth import get_user_model
@@ -140,6 +141,67 @@ def test_geocode_location_failure():
         mock_gmaps_client.geocode.assert_called_once_with(location_name)
 
 
+def test_get_place_details_success():
+    # Setup: Mock the gmaps client and its place method
+    mock_gmaps = Mock()
+    expected_result = {
+        'status': 'OK',
+        'result': {
+            'name': 'Eiffel Tower',
+            'website': 'http://www.toureiffel.paris/',
+            'url': 'https://www.google.com/maps?cid=123',
+            'opening_hours': {'open_now': True},
+            'review': 'Excellent'
+        }
+    }
+    mock_gmaps.place.return_value = expected_result
+
+    # Call the function
+    place_id = 'ChIJLU7jZClu5kcR4PcOOO6p3I0'
+    success, result = get_place_details(mock_gmaps, place_id)
+
+    # Assert that the function returns the correct results
+    assert success == True
+    assert result == expected_result['result']
+    mock_gmaps.place.assert_called_once_with(place_id=place_id,
+                                             fields=['name', 'website', 'url', 'opening_hours', 'review'])
+
+
+def test_get_place_details_failure():
+    # Setup: Mock the gmaps client and its place method to simulate an API failure
+    mock_gmaps = Mock()
+    expected_result = {
+        'status': 'NOT_FOUND'
+    }
+    mock_gmaps.place.return_value = expected_result
+
+    # Call the function
+    place_id = 'invalid-place-id'
+    success, error_message = get_place_details(mock_gmaps, place_id)
+
+    # Assert that the function handles failures correctly
+    assert success == False
+    assert error_message == f"Details fetch failed: {expected_result['status']}"
+    mock_gmaps.place.assert_called_once_with(place_id=place_id,
+                                             fields=['name', 'website', 'url', 'opening_hours', 'review'])
+
+
+def test_get_place_details_exception():
+    # Setup: Mock the gmaps client and its place method to raise an exception
+    mock_gmaps = Mock()
+    mock_gmaps.place.side_effect = Exception("An error occurred")
+
+    # Call the function
+    place_id = 'some-place-id'
+    success, error_message = get_place_details(mock_gmaps, place_id)
+
+    # Assert that the function handles exceptions correctly
+    assert success == False
+    assert "An error occurred" in error_message
+    mock_gmaps.place.assert_called_once_with(place_id=place_id,
+                                             fields=['name', 'website', 'url', 'opening_hours', 'review'])
+
+
 @pytest.mark.django_db
 def test_process_and_return_places_success():
     # Mock data as would be returned by the Google Maps API
@@ -162,33 +224,32 @@ def test_process_and_return_places_success():
         }
     ]
     google_maps_api_key = 'fake-api-key'
+    mock_gmaps = Mock()
 
-    # Expected result formatted by the function
-    expected = [{
-        'title': 'Eiffel Tower',
-        'editSummary': 'Summary of Eiffel Tower',
-        'name': 'Eiffel Tower',
-        'address': 'Champ de Mars, 5 Avenue Anatole France, Paris',
-        'placeID': '12345',
-        'photos': f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=abcdef&key=fake-api-key",
-        'openHour': 'Open Now',
-        'periods': 'Not Available',
-        'rating': '4.7',
-        'urlLink': 'URL Placeholder',
-        'businessStatus': 'OPERATIONAL',
-        'location': '48.8588443, 2.2943506',
-        'lat': '48.8588443',
-        'lng': '2.2943506',
-        'northeast': '48.8596934, 2.2954995',
-        'southwest': '48.8580434, 2.2931507',
-        'website': 'Website Placeholder'
-    }]
+    with patch('utils.helpers.get_place_details',
+               return_value=(True, {'website': 'Website Placeholder', 'url': 'URL Placeholder'})) as mock_get_details:
+        expected = [{
+            'title': 'Eiffel Tower',
+            'editSummary': 'Explore Eiffel Tower which is popular for its place.',
+            'name': 'Eiffel Tower',
+            'address': 'Champ de Mars, 5 Avenue Anatole France, Paris',
+            'placeID': '12345',
+            'photos': f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=abcdef&key={google_maps_api_key}",
+            'openHour': 'Open Now',
+            'periods': 'Not Available',
+            'rating': '4.7',
+            'urlLink': 'URL Placeholder',
+            'businessStatus': 'OPERATIONAL',
+            'location': '48.8588443, 2.2943506',
+            'lat': '48.8588443',
+            'lng': '2.2943506',
+            'northeast': '48.8596934, 2.2954995',
+            'southwest': '48.8580434, 2.2931507',
+            'website': 'Website Placeholder'
+        }]
 
-    # Call the function with mock data
-    results = process_and_return_places(mock_places, google_maps_api_key)
-
-    # Assert the processed data matches the expected output
-    assert results == expected
+        results = process_and_return_places(mock_places, mock_gmaps, google_maps_api_key)
+        assert results == expected
 
 
 def test_calculate_total_days():
@@ -296,7 +357,8 @@ def test_generate_itinerary():
         # Ensure the mocked functions were called with the correct parameters
         mock_calculate_days.assert_called_once_with(start_date, end_date)
         mock_fetch_places.assert_called_once_with(gmaps, location, 3)
-        mock_process_places.assert_called_once_with(['Place1', 'Place2', 'Place3'], google_maps_api_key)
+        mock_process_places.assert_called_once_with(['Place1', 'Place2', 'Place3'], gmaps,
+                                                    google_maps_api_key)
         mock_distribute_days.assert_called_once_with(start_date, end_date,
                                                      [{'name': 'Place1'}, {'name': 'Place2'}, {'name': 'Place3'}])
 

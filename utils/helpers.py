@@ -73,7 +73,19 @@ def geocode_location(gmaps, location_name):
         return False, f"Could not geocode the location: {location_name}"
 
 
-def process_and_return_places(places, google_maps_api_key):
+def get_place_details(gmaps, place_id, fields=['name', 'website', 'url', 'opening_hours', 'review']):
+    """Fetch detailed information for a place using its place_id."""
+    try:
+        details_result = gmaps.place(place_id=place_id, fields=fields)
+        if details_result['status'] == 'OK':
+            return True, details_result['result']
+        else:
+            return False, f"Details fetch failed: {details_result['status']}"
+    except Exception as e:
+        return False, str(e)
+
+
+def process_and_return_places(places, gmaps, google_maps_api_key):
     """_summary_
 
     Args:
@@ -85,17 +97,21 @@ def process_and_return_places(places, google_maps_api_key):
     """
     extracted_activities = []
     for place in places:
-        # Initialize an empty dictionary for the current place
-        activity = {}
+        activity = {'title': place.get('name', ''),
+                    'editSummary': 'Explore ' + place.get('name', '') + ' which is popular for its ' + \
+                                   place.get('types', ['place'])[0].replace('_', ' ') + '.',
+                    'name': place.get('name', ''), 'address': place.get('vicinity', ''),
+                    'placeID': place.get('place_id', '')}
 
-        # Basic place details
-        activity['title'] = place.get('name', '')
-        activity['editSummary'] = 'Summary of ' + place.get('name', '')
-        activity['name'] = place.get('name', '')
-        activity['address'] = place.get('vicinity', '')
-        activity['placeID'] = place.get('place_id', '')
+        # Fetch detailed information including the website
+        success, details = get_place_details(gmaps, place['place_id'])
+        if success:
+            activity['website'] = details.get('website', 'Website Placeholder')
+            activity['urlLink'] = details.get('url', 'URL Placeholder')
+        else:
+            activity['website'] = 'Website Placeholder'  # Fallback if details fetch fails
+            activity['urlLink'] = 'URL Placeholder'
 
-        # Handling photos - only storing the first photo reference
         photos = place.get('photos', [])
         if photos:
             photo_reference = photos[0].get('photo_reference', '')
@@ -107,19 +123,13 @@ def process_and_return_places(places, google_maps_api_key):
         else:
             activity['photos'] = ''
 
-        # Open hours
         open_now = place.get('opening_hours', {}).get('open_now', False)
         activity['openHour'] = 'Open Now' if open_now else 'Closed'
-        # Assuming 'periods' needs specific processing or fetching from elsewhere as it's not directly available in this input
-        activity['periods'] = 'Not Available'
+        activity['periods'] = place.get('opening_hours', {}).get('periods', 'Not Available')
 
-        # Rating and URL link
         activity['rating'] = str(place.get('rating', ''))
-        # Assuming 'urlLink' requires generating or fetching from elsewhere as it's not directly available in this input
-        activity['urlLink'] = 'URL Placeholder'
 
         activity['businessStatus'] = str(place.get('business_status', ''))
-        # Location details
         location = place.get('geometry', {}).get('location', {})
         viewport = place.get('geometry', {}).get('viewport', {})
         activity['location'] = f"{location.get('lat', '')}, {location.get('lng', '')}"
@@ -130,10 +140,6 @@ def process_and_return_places(places, google_maps_api_key):
         activity[
             'southwest'] = f"{viewport.get('southwest', {}).get('lat', '')}, {viewport.get('southwest', {}).get('lng', '')}"
 
-        # Additional fields
-        activity['website'] = 'Website Placeholder'  # Assuming this needs fetching or a placeholder for now
-
-        # Append the activity dictionary to the list
         extracted_activities.append(activity)
 
     return extracted_activities
@@ -194,8 +200,6 @@ def fetch_places(gmaps, location, total_days):
         current_radius += radius_increment
         attempts += 1
 
-    # Combine and shuffle the places to mix activities and food places
-
     combined_places = activities + food_places
     shuffle(combined_places)
 
@@ -217,7 +221,7 @@ def generate_itinerary(gmaps, location, start_date, end_date, google_maps_api_ke
     """
     total_days = calculate_total_days(start_date, end_date)
     combined_places = fetch_places(gmaps, location, total_days)
-    processed_places = process_and_return_places(combined_places, google_maps_api_key)
+    processed_places = process_and_return_places(combined_places, gmaps, google_maps_api_key)
 
     # Distribute places across days
     itinerary = distribute_places_to_days(start_date, end_date, processed_places)
@@ -341,14 +345,13 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
             day_number=day_index + 1
         )
         new_day.save()
-
         # Reset start time for each day
-        start_time = initial_start_time
+        end_time = initial_start_time
 
         # Step 3: Save activities for the day
         for activity_data in activities_for_day:
-            save_activity(new_day, activity_data, start_time)
-    
+            end_time = save_activity(new_day, activity_data, end_time)
+
     return new_itinerary.id
 
 
@@ -391,6 +394,7 @@ def save_activity(day, activity_data, start_time):
     new_activity.save()
 
     return end_time
+<<<<<<< HEAD
 
 
 def get_map_data(itinerary):
@@ -411,3 +415,5 @@ def get_map_default_location(itinerary):
     lat = itinerary_instance.destination_lat
     lng = itinerary_instance.destination_lng
     return (lat, lng)
+=======
+>>>>>>> ec3043d (getting activity urls and fixed event start times/end times)
