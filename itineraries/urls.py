@@ -12,4 +12,5 @@ urlpatterns = [
     path('map/', views.map),
     path('itinerary/<int:itinerary_id>/', views.itinerary, name='itinerary'),
     path('trips/', views.trips, name='trips'),
+    path('profile/', views.profile_view, name='profile'),
 ]
