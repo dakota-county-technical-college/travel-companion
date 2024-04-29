@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -121,11 +122,14 @@ def signup(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home')
+            user = form.save()
+            login(request, user)  # Log in the user after registration
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = UserRegistrationForm()
-    return render(request, 'home', {'form': form})
+    return render(request, 'index.html', {'form': form})
 
 
 def login_view(request):
@@ -145,9 +149,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return JsonResponse({'success': True})
         else:
-            return redirect('home')
+            return JsonResponse({'success': False, 'errors': 'Invalid credentials. Please try again.'})
     return render(request, 'home.html')
 
 
