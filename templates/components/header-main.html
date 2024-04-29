@@ -24,7 +24,7 @@
             {% if request.resolver_match.url_name != 'home' %}
                 <div class="flex-column" id="personal-logo">
                     <img src="{% static 'images/branding/trips-r-us-logo-top.png' %}" alt="Trips-R-Us-Logo-Top">
-                    <h3>Welcome, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!</h3>
+                    <h6 class="personal-logo">Welcome, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!</h6>
                     <img src="{% static 'images/branding/trips-r-us-logo-bottom.png' %}" alt="Trips-R-Us-Logo-Bottom">
                 </div>
             {% endif %}

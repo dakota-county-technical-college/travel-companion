@@ -13,11 +13,11 @@
 {% block content %}
     {% if itinerary %}
         <section class="itinerary-wrapper">
-            <h1 id="itinerary-title">{{ itinerary.title }}</h1>
+            <h2 id="itinerary-title">{{ itinerary.title }}</h2>
             {% for day in itinerary.days.all %}
                 <div class="itinerary-day">
                     <div class="itinerary-day-left-column">
-                        <h2 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h2>
+                        <h3 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h3>
                         {% for activity in day.activity_set.all %}
                             {% include 'components/activity-card.html' %}
                         {% endfor %}
