@@ -1,0 +1,23 @@
+.container {
+max-width: 800px; /*1200px;*/
+margin: 100px auto;
+display: flex;
+flex-wrap: wrap;
+gap: 40px;   
+background-color: whitesmoke/*rgba(230, 242, 255, 0.27)*/ /*#fff*/;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+padding: 20px;
+}
+
+.panel {
+flex: 1 1 300px; /* Flex property to make panels equal width */
+padding: 60px; /*60px*/
+background-color: #f9f9f9;
+border-radius: 8px;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.name{
+padding: 5px;
+}

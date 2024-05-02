@@ -154,3 +154,7 @@ p.error {
 .white {
     color: white;
 }
+
+.nav-item {
+    font-family: 'Poppins', 'San-serif';
+}
