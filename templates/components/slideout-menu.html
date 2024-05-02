@@ -2,13 +2,13 @@
         <div class="user">
             <!--Find how to pull User's name to display-->
             <div>
-                <p class="bold">User</p>
-                <i class="fa-solid fa-x" id="close-icon"></i>
+                <p class="bold">Welcome {% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}</p>
+                <!--<i class="fa-solid fa-x" id="close-icon"></i>-->
             </div>
         </div>
         <ul>
-            <a href="{% url 'profile' %}">
-                <span class="nav-item">View Profile</span>
+            <a href="{% url 'profile' %}" class="nav-item">
+                <li>View Profile</li>
             </a>
         </ul>
         <!--Place the JS into file-->
@@ -19,13 +19,13 @@
     btn.onclick = function () {
         sidebar.classList.toggle('active');
     };
-    document.addEventListener("DOMContentLoaded", function() {
-        let closeBtn = document.querySelector('#close-icon');
-        let sidebar = document.querySelector('.sidebar');
+    //document.addEventListener("DOMContentLoaded", function() {
+      //  let closeBtn = document.querySelector('#close-icon');
+        //let sidebar = document.querySelector('.sidebar');
     
-        closeBtn.onclick = function() {
-            sidebar.classList.remove('active');
-        };
-    });
+        //closeBtn.onclick = function() {
+        //    sidebar.classList.remove('active');
+        //};
+    //});
     
 </script>

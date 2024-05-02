@@ -172,3 +172,7 @@ h2.bold {
 .white {
     color: white;
 }
+
+.nav-item{
+    font-family: 'Poppins', 'San-serif';
+}
