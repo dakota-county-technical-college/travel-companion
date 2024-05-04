@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if itinerary %}
+        Itinerary | {{ itinerary.title }}
+    {% else %}
+        Error
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+    {% if itinerary %}
+        <section class="itinerary-wrapper">
+            <h2 id="itinerary-title">{{ itinerary.title }}</h2>
+            {% for day in itinerary.days.all %}
+                <div class="itinerary-day">
+                    <div class="itinerary-day-left-column">
+                        <h3 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h3>
+                        {% for activity in day.activity_set.all %}
+                            {% include 'components/activity-card.html' %}
+                        {% endfor %}
+                    </div>
+                    <div class="itinerary-day-right-column">
+                        <img src="{% static 'images/illustrations/map-placeholder.png' %}" alt="Map of Day {{ day.day_number }} Actvities">
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    {% else %}
+        <p>Itinerary could not be found. Please try again later.</p>
+    {% endif %}
+{% endblock %}
