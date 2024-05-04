@@ -421,7 +421,6 @@ def test_get_recommendation_success():
         mock_generate_itinerary.assert_called_once()
 
 
-
 @pytest.mark.django_db
 def test_get_recommendation_no_api_key():
     with patch('utils.helpers.load_google_maps_api_key') as mock_load_api_key:
@@ -454,12 +453,13 @@ def test_save_itinerary():
         date(2023, 4, 2): {'places': [{'title': 'Louvre Museum', 'start_time': time(8, 0)}]},
         date(2023, 4, 3): {'places': [{'title': 'Notre Dame', 'start_time': time(8, 0)}]}
     }
-    destination_lat = 48.8566  # Paris latitude
-    destination_lng = 2.3522   # Paris longitude
+    destination_lat = 48.8566
+    destination_lng = 2.3522
 
     # Act
     # Call the function under test
-    itinerary_id = save_itinerary(user, destination, start_date, end_date, travelers, activities_data, destination_lat, destination_lng)
+    itinerary_id = save_itinerary(user, destination, start_date, end_date, travelers, activities_data, destination_lat,
+                                  destination_lng)
 
     # Assert
     # Assertions to verify database entries
@@ -478,7 +478,6 @@ def test_save_itinerary():
 
     # Optionally, cleanup if not using transactional tests
     user.delete()
-
 
 
 @pytest.mark.django_db

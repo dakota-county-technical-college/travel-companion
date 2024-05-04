@@ -286,7 +286,8 @@ def get_recommendation(destination, start_date, end_date):
     return True, itinerary, location
 
 
-def save_itinerary(user, destination, start_date, end_date, travelers, activities_data, destination_lat, destination_lng):
+def save_itinerary(user, destination, start_date, end_date, travelers, activities_data, destination_lat,
+                   destination_lng):
     """_summary_
 
     Args:
@@ -313,18 +314,6 @@ def save_itinerary(user, destination, start_date, end_date, travelers, activitie
         destination_lng=destination_lng,
     )
 
-    # itinerary_instance = Itinerary.objects.create = Itinerary(
-    #     user=user,
-    #     title=f"My Trip to {destination}",
-    #     destination=destination,
-    #     start_date=start_date,
-    #     end_date=end_date,
-    #     description=f"A trip to {destination} with {travelers} travelers.",
-    #     num_travelers=travelers,
-    #     destination_lat=destination_lat,
-    #     destination_lng=destination_lng,
-    # )
-    
     new_itinerary.save()
 
     # Get number of days for the trip
@@ -395,6 +384,7 @@ def save_activity(day, activity_data, start_time):
 
     return end_time
 
+
 def get_map_data(itinerary):
     itinerary = Itinerary.objects.get(id=itinerary)
     days = Day.objects.filter(itinerary_id=itinerary.pk)
@@ -402,11 +392,12 @@ def get_map_data(itinerary):
     for day in days:
         for activity in Activity.objects.filter(day_id=day.pk).values():
             activities.append({
-                "id":activity.get("id"),
-                "title":activity.get("title"),
-                "location":activity.get("location")
+                "id": activity.get("id"),
+                "title": activity.get("title"),
+                "location": activity.get("location")
             })
     return activities
+
 
 def get_map_default_location(itinerary):
     itinerary_instance = Itinerary.objects.get(id=itinerary)
