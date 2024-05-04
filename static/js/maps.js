@@ -2,26 +2,45 @@
 let map;
 
 async function initMap() {
-  // The location of DCTC
-  const position = { lat: 44.737, lng: -93.079 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  try {
+    // Center the map on the requested city.
+    const defaultLocation = JSON.parse(document.getElementById('map-default-location').textContent);
+    const position = { lat: defaultLocation[0], lng: defaultLocation[1] };
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 4,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-  });
+    // Request needed libraries.
+    const { Map, Marker } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  // The marker, positioned at DCTC
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: "DCTC",
-  });
+    // The map, centered at the default location
+    map = new Map(document.getElementById("map"), {
+      zoom: 12,
+      center: position,
+      mapId: "DEMO_MAP_ID",
+    });
+
+    // Create markers for each location in mapData
+    const mapData = JSON.parse(document.getElementById('map-data').textContent);
+    for (const location of mapData) {
+      // Check if location exists and has a valid location property
+      if (location && location.location) {
+        const [lat, lng] = location.location.trim().split(',').map(parseFloat);
+        // Check if lat and lng are valid numbers
+        if (!isNaN(lat) && !isNaN(lng)) {
+          const marker = new AdvancedMarkerElement({
+            position: { lat, lng },
+            map: map,
+            title: location.title,
+          });
+        } else {
+          console.error("Invalid latitude or longitude:", location.location);
+        }
+      } else {
+        console.error("Invalid location:", location);
+      }
+    }
+  } catch (error) {
+    console.error("An error occurred while initializing the map:", error);
+  }
 }
 
 initMap();

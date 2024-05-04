@@ -169,7 +169,7 @@ hr {
 }
 
 .itinerary-day-right-column{
-    max-width: 30%;
+    min-width: 30%;
 }
 
 /* Activity cards */
@@ -250,6 +250,15 @@ itinerary-card-content {
     /* Enable horizontal scrolling */
     gap: 20px;
     /* Add space between cards */
+}
+
+/* Map Styling */
+.map {
+    height: 600px;
+    /* The height is 600 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+    float: right;
 }
 
 /* Special rules for lower breakpoints (not including mobile devices) */

@@ -407,11 +407,12 @@ def test_get_recommendation_success():
         mock_generate_itinerary.return_value = {'itinerary': 'details'}
 
         # Call function
-        success, result = get_recommendation('Los Angeles', date(2023, 4, 1), date(2023, 4, 3))
+        success, result, location = get_recommendation('Los Angeles', date(2023, 4, 1), date(2023, 4, 3))
 
         # Assertions
         assert success is True
         assert result == {'itinerary': 'details'}
+        assert location == (34.052235, -118.243683)
 
         # Ensure the mocks were called as expected
         mock_load_api_key.assert_called_once()
@@ -448,23 +449,29 @@ def test_save_itinerary():
     end_date = date(2023, 4, 3)
     travelers = 2
     activities_data = {
-        date(2023, 4, 1): {'places': [{'title': 'Eiffel Tower', 'start_time': datetime.now()}]},
-        date(2023, 4, 2): {'places': [{'title': 'Louvre Museum', 'start_time': datetime.now()}]},
-        date(2023, 4, 3): {'places': [{'title': 'Notre Dame', 'start_time': datetime.now()}]}
+        date(2023, 4, 1): {'places': [{'title': 'Eiffel Tower', 'start_time': time(8, 0)}]},
+        date(2023, 4, 2): {'places': [{'title': 'Louvre Museum', 'start_time': time(8, 0)}]},
+        date(2023, 4, 3): {'places': [{'title': 'Notre Dame', 'start_time': time(8, 0)}]}
     }
+    destination_lat = 48.8566
+    destination_lng = 2.3522
 
+    # Act
     # Call the function under test
-    save_itinerary(user, destination, start_date, end_date, travelers, activities_data)
+    itinerary_id = save_itinerary(user, destination, start_date, end_date, travelers, activities_data, destination_lat,
+                                  destination_lng)
 
+    # Assert
     # Assertions to verify database entries
-    itinerary = Itinerary.objects.get(user=user, destination=destination)
+    itinerary = Itinerary.objects.get(id=itinerary_id)
     assert itinerary.title == f"My Trip to {destination}"
     assert itinerary.num_travelers == travelers
 
     # Check days and activities saved correctly
     days = Day.objects.filter(itinerary=itinerary).order_by('date')
     assert days.count() == 3
-    for day, data in zip(days, activities_data.values()):
+    for day, (date_key, data) in zip(days, activities_data.items()):
+        assert day.date == date_key
         activities = Activity.objects.filter(day=day)
         assert activities.count() == 1
         assert activities.first().title == data['places'][0]['title']
