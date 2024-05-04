@@ -394,8 +394,6 @@ def save_activity(day, activity_data, start_time):
     new_activity.save()
 
     return end_time
-<<<<<<< HEAD
-
 
 def get_map_data(itinerary):
     itinerary = Itinerary.objects.get(id=itinerary)
@@ -415,5 +413,3 @@ def get_map_default_location(itinerary):
     lat = itinerary_instance.destination_lat
     lng = itinerary_instance.destination_lng
     return (lat, lng)
-=======
->>>>>>> ec3043d (getting activity urls and fixed event start times/end times)
