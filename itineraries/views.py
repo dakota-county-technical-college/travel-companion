@@ -68,7 +68,7 @@ def itinerary(request, itinerary_id):
     Returns:
         if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
     """
-    
+    GOOGLE_MAPS_API_KEY = helpers.load_google_maps_api_key()
     context = request.session.get('itinerary_context')
     if context:
         map_data = context.pop('map_data')
@@ -79,7 +79,7 @@ def itinerary(request, itinerary_id):
     days = itinerary.days.all()
     activities = Activity.objects.filter(day__in=days)
     # TODO: Only show the itinerary if the user is the owner of the itinerary, otherwise redirect to the home page.
-    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities, 'map_data': map_data, 'map_default_location': map_default_location, 'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY})
+    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities, 'map_data': map_data, 'map_default_location': map_default_location, 'google_maps_api_key': GOOGLE_MAPS_API_KEY})
 
 
 def trips(request):

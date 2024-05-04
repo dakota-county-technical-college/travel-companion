@@ -8,15 +8,7 @@
     <title>{% block title %}Trips-R-Us{% endblock %}</title>
     {% block css %}<link href="{% static 'css/mainstyles.css' %}" type="text/css" rel="stylesheet">{% endblock %}
     <script src="https://kit.fontawesome.com/1ea4dc5d95.js" crossorigin="anonymous"></script>
-    <script>
-      // The below code loads the google maps api. Source: https://developers.google.com/maps/documentation/javascript/load-maps-js-api#dynamic-library-import
-      (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-        key: "AIzaSyDTxHzXGYgKdtZAkIFvJOtJ4Q_-MwDRljc",
-        v: "weekly",
-        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-        // Add other bootstrap parameters as needed, using camel case.
-      });
-  </script>
+    {% block head_javascript %}{% endblock %}
   <script>
     const googleMapsApiKey = '{{ google_maps_api_key }}';
 </script>
@@ -42,7 +34,6 @@
 
     <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <script src="{% static 'static/js/maps.js' %}"></script>
     {% block javascript %}{% endblock %}
   
   </body>

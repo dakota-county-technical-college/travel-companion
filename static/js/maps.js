@@ -9,6 +9,7 @@ async function initMap() {
 
     // Request needed libraries.
     const { Map, Marker } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
     // The map, centered at the default location
     map = new Map(document.getElementById("map"), {
@@ -19,20 +20,13 @@ async function initMap() {
 
     // Create markers for each location in mapData
     const mapData = JSON.parse(document.getElementById('map-data').textContent);
-    console.log("************mapData");
-    console.log(mapData);
-    console.log(googleMapsApiKey);
-    console.log("************mapdatadone");
     for (const location of mapData) {
-      console.log("************location");
-      console.log(location);
-      console.log("************locationdone");
       // Check if location exists and has a valid location property
       if (location && location.location) {
         const [lat, lng] = location.location.trim().split(',').map(parseFloat);
         // Check if lat and lng are valid numbers
         if (!isNaN(lat) && !isNaN(lng)) {
-          const marker = new Marker({
+          const marker = new AdvancedMarkerElement({
             position: { lat, lng },
             map: map,
             title: location.title,
