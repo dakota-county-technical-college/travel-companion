@@ -1,14 +1,16 @@
 {% load static %}
 <div class="itinerary-card">
-    <div class="media">
-      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1773&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paris, France">
+  <a href="{% url 'itinerary' itinerary.id %}">
+    <div class="itinerary-card-media">
+      <img src="{{ activity.photos }}" alt="{{ itinerary.destination }}">
     </div>
-    <div class="content">
-      <h2 class="destination">Washington, DC</h2>
-      <div class="date">July 10-15, 2024</div>
-      <p class="description">
-        Washington, DC, the capital of the United States, is known for its iconic monuments and landmarks, including the White House, Capitol Building, and Smithsonian museums.
+    <div class="itinerary-card-content">
+      <h4 class="itinerary-card-destination">{{ itinerary.destination }}</h2>
+      <div class="date">{{ itinerary.start_date }} - {{ itinerary.end_date }}</div>
+      <p class="itinerary-card-description">
+        {{ itinerary.description}}
       </p>
       <button class="itinerary-button">Itinerary</button>
     </div>
-  </div>
+  </a>
+</div>

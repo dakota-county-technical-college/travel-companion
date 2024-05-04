@@ -25,7 +25,6 @@ class UserRegistrationForm(UserCreationForm):
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
         self.fields['first_name'].widget.attrs.update({'placeholder': 'First Name'})
         self.fields['last_name'].widget.attrs.update({'placeholder': 'Last Name'})
-        # `password1` and `password2` don't need to be defined again since they're already included in `fields`
         self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
 

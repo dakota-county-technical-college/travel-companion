@@ -1,0 +1,94 @@
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30vh;
+    width: 90px;
+    padding: .4rem .8rem;
+    transform: translate(20px, 20px);
+    transition: all 0.5s ease;
+     /* z-index: 1;*/
+}
+
+.sidebar.active {
+    width: 200px;
+    background-color: #e2e2e2;
+    border-radius: 15px;
+    padding-left: 5px;
+     /* z-index: 2;*/
+}
+
+.sidebar #menu-icon{
+    position: absolute;
+    color: black;
+    top: .4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    /*Change cursor to pointer*/
+}
+
+.sidebar.active #menu-icon{
+    left:90%;
+}
+
+.sidebar #close-icon{
+    opacity: 0;
+}
+
+.sidebar.active #close-icon {
+    position: absolute;
+    top: 2.5rem;
+    right: 1.5rem;
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.user {
+    display: flex;
+}
+
+.user p {
+    color: black;
+    opacity: 1;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    padding: 15px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.sidebar p {
+    opacity: 0;
+}
+
+.sidebar.active p{
+    opacity: 1;
+}
+
+.sidebar ul a{
+    color: black;
+    display: flex;
+    align-items: center;
+    /*text-decoration: none;*/
+    border-radius: 0.8rem;
+}
+
+.sidebar ul a:hover{
+    background-color: #fff;
+    color: grey;
+    border-radius: 0.8rem; /* Rounded border on hover */
+    padding: 5px;
+}
+
+.sidebar .nav-item{
+    opacity: 0;
+}
+
+.sidebar.active .nav-item{
+    opacity: 1;
+}
