@@ -79,7 +79,8 @@ Note: All buttons should be assigned the following classes:
 /* Define styles for buttons in hover state */
 .btn.txt.bt1:hover,
 .btn.outlined.bt1:hover {
-    background-color: var(--orange-transparent);
+    background-color: var(--orange);
+    color: var(--secondary-text)
 }
 
 .btn.txt.bt2:hover,
@@ -117,4 +118,13 @@ Note: All buttons should be assigned the following classes:
     background-color: var(--orange);
     border-color: var(--orange);
     color: var(--primary-text);
+}
+
+.modal-button{
+    background-color: var(--secondary-text)!important;
+}
+
+.modal-button:hover {
+    color: var(--primary-text) !important;
+    background-color: var(--orange) !important;
 }
