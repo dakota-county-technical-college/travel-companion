@@ -168,8 +168,18 @@ hr {
     margin-bottom: 70px;
 }
 
+.itinerary-day-left-column {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
 .itinerary-day-right-column{
-    min-width: 30%;
+    min-height: 600px;
+    height: 100%;
+    width: 60%;
+    position: sticky;
+    top: 5vh;
 }
 
 /* Activity cards */
@@ -254,7 +264,7 @@ itinerary-card-content {
 
 /* Map Styling */
 .map {
-    height: 600px;
+    height: 90vh;
     /* The height is 600 pixels */
     width: 100%;
     /* The width is the width of the web page */
@@ -270,3 +280,28 @@ itinerary-card-content {
         padding: 0 0 20px;
     }
 }
+
+/* HTML Map marker styles */
+.activity-tag {
+    background-color: #018CB5;
+    border-radius: 8px;
+    color: #E9FAFF;
+    font-size: 14px;
+    padding: 10px 15px;
+    position: relative;
+    box-shadow: 3px 3px 3px #3B2C27;
+  }
+  
+  .activity-tag::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #018CB5;
+    box-shadow: 3px 3px 3px #3B2C27;
+  }
