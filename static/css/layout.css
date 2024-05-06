@@ -176,13 +176,13 @@ hr {
 .itinerary-day-left-column {
     display: flex;
     flex-direction: column;
-    min-width: 40%;
+    min-width:40%;
 }
 
 .itinerary-day-right-column{
     min-height: 600px;
     height: 100%;
-    min-width: 50%;
+    min-width: 60%;
     position: sticky;
     top: 5vh;
 }
@@ -196,7 +196,7 @@ hr {
     border-radius: 8px;
     margin-bottom: 20px;
     background-color: #F8F7F5; /*TODO Revise color with the root */
-    width:900px;
+    width:100%;
 }
 
 .activity-card-media {
