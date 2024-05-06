@@ -52,6 +52,11 @@ This stylesheet defines all global layout conventions, including backagrounds, d
     height: 200px;
 }
 
+.nav-register-span {
+    display:flex;
+    margin-right: 10px;
+}
+
 /* Display rules */
 .inline {
     display: inline;
@@ -173,15 +178,15 @@ hr {
 }
 
 /* Activity cards */
+
 .activity-card {
     display: grid;
     grid-template-columns: minmax(34%, 34%) minmax(40%, 40%) minmax(20%, 26%);
     grid-template-rows: auto auto auto auto; /* Adjusted to 4 rows */
-    border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 20px;
-    max-width: 50vw;
     background-color: #F8F7F5; /*TODO Revise color with the root */
+    width:900px;
 }
 
 .activity-card-media {
@@ -193,7 +198,8 @@ hr {
 
 .activity-card-media img {
     width: 100%;
-    height: 100%;
+    min-height: 200px;
+    max-height: 200px;
     object-fit: cover;
   }
 
@@ -202,21 +208,32 @@ hr {
     padding: 0px 20px 0px 20px;
 }
 
+.activity-card-activity {
+    margin-bottom: 10px;
+    padding: 20px 20px 0px 20px;
+  }
+
 .activity-card-description {
     margin-bottom: 5px;
     grid-column: 2 / 4;
 }
 
+.activity-card-location {
+    margin-top:0px;
+    margin-bottom: 5px;
+    grid-column: 2 / 4; /* Adjusted to span columns 2 and 3 */
+  }
+
 .activity-card-time {
     grid-column: 3 / 4; /* Adjusted to column 3 */
     grid-row: 1 / 2; /* Adjusted to row 1 */
-    margin-top: 15px;
-    margin-right: 15px;
+    margin-top: 20px;
+    margin-right: 20px;
     margin-bottom: auto;
     justify-self: end;  
 }
 
-.activity-card-button {
+.activity-card-btn {
     grid-column: 3 / 4;
     grid-row: 4 / 5; /* Adjusted to 4th row */
     display: block;
@@ -224,24 +241,69 @@ hr {
     border-radius: 5px;
     transition: background-color 0.3s ease;
     margin-top: auto;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 15px;
+    margin-bottom: 15px;
 }
 
 
 
 /* Itinerary-cards */
+.itinerary-section-title {
+    margin-left: 30px;;
+}
+
+.itinerary-day-title {
+    margin-bottom: 20px;
+}
+
 .itinerary-card {
     flex: 0 0 auto; /* Allow cards to shrink if needed */
     width: 300px; /* Set a fixed width for cards */
+    height: 500px;
     background-color: #F8F7F5;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
 }
 
-itinerary-card-content {
-    padding: 20px; /* Add padding to the content area */
+.itinerary-card-media {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the image */
+    width: 100%;
 }
+
+.itinerary-card-media img {
+    width: 100%; /* Adjust image width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 200px;
+
+    border-radius: 10px 10px 0 0; /* Rounded corners for top of image */
+    display: block;
+}
+
+.itinerary-card-content {
+    flex: 2;
+    padding: 20px; /* Add padding to the content area */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: left; /* Center content horizontally */
+}
+
+.itinerary-card a {
+    text-decoration: none;
+}
+
+.itinerary-card-button {
+    background: none;
+    border: none;
+    color: #018CB5;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 10px;
+  }
 
 .carousel {
     display: flex;

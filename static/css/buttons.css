@@ -14,8 +14,7 @@ Note: All buttons should be assigned the following classes:
 
 /* Define styles for buttons in regular state */
 .btn {
-    display: inline-block;
-    margin: 5px;
+    display: block;
     padding: 10px 16px;
     text-transform: uppercase;
     text-align: center;
@@ -34,7 +33,7 @@ Note: All buttons should be assigned the following classes:
 .btn.txt.bt1 {
     background-color: transparent;
     border: none;
-    color: var(--orange);
+    color: var(--primary-text);
 }
 .btn.txt.bt2 {
     background-color: transparent;
@@ -48,7 +47,7 @@ Note: All buttons should be assigned the following classes:
 }
 
 .btn.outlined.bt1 {
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--orange);
 }
 
 .btn.outlined.bt2 {
@@ -62,7 +61,7 @@ Note: All buttons should be assigned the following classes:
 }
 
 .btn.contained.bt1 {
-    background-color: var(--yellow);
+    background-color: var(--orange);
 }
 
 .btn.contained.bt2 {
@@ -80,7 +79,7 @@ Note: All buttons should be assigned the following classes:
 /* Define styles for buttons in hover state */
 .btn.txt.bt1:hover,
 .btn.outlined.bt1:hover {
-    background-color: var(--yellow-transparent);
+    background-color: var(--orange-transparent);
 }
 
 .btn.txt.bt2:hover,
@@ -93,8 +92,8 @@ Note: All buttons should be assigned the following classes:
 }
 
 .btn.contained.bt1:hover {
-    border-color: var(--yellow);
-    color: var(--yellow);
+    border-color: var(--orange);
+    color: var(--orange);
 }
 
 .btn.contained.bt2:hover {
@@ -115,7 +114,7 @@ Note: All buttons should be assigned the following classes:
 .btn.txt.bt2:active,
 .btn.outlined.bt2:active,
 .btn.contained.bt2:active {
-    background-color: var(--yellow);
-    border-color: var(--yellow);
+    background-color: var(--orange);
+    border-color: var(--orange);
     color: var(--primary-text);
 }
