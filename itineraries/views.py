@@ -187,4 +187,4 @@ def map(request):
     return render(request, 'test/map.html')
 
 def profile_view(request):
-    return redirect(request, 'profile')
+    return render(request, 'profile.html')

@@ -12,6 +12,7 @@ designated style sheets.
 @import url('modals.css');
 @import url('form-elements.css');
 @import url('slidestyle.css');
+@import url('profile.css');
 
 /* Set base SCSS properties as constants */
 :root {
