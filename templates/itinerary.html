@@ -26,14 +26,14 @@
             <h2 id="itinerary-title">{{ itinerary.title }}</h2>
             <div class="itinerary-day">
                 <div class="itinerary-day-left-column">
-                {% for day in itinerary.days.all %}
-                    <div class="itinerary-day-column">
-                        <h3 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h3>
-                        {% for activity in day.activity_set.all %}
-                            {% include 'components/activity-card.html' %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+                    {% for day in itinerary.days.all %}
+                        <div class="itinerary-day-column">
+                            <h3 class="itinerary-day-title">Day {{ day.day_number }}: {{ day.date }}</h3>
+                            {% for activity in day.activity_set.all %}
+                                {% include 'components/activity-card.html' %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
                 <div class="itinerary-day-right-column">
                     {{ map_data|json_script:'map-data' }}
