@@ -1,16 +1,15 @@
 {% load static %}
 <div class="itinerary-card">
-  <a href="{% url 'itinerary' itinerary.id %}">
     <div class="itinerary-card-media">
       <img src="{{ activity.photos }}" alt="{{ itinerary.destination }}">
     </div>
     <div class="itinerary-card-content">
       <h4 class="itinerary-card-destination">{{ itinerary.destination }}</h2>
-      <div class="date">{{ itinerary.start_date }} - {{ itinerary.end_date }}</div>
+      <div class="itinerary-card-date">{{ itinerary.start_date }} - {{ itinerary.end_date }}</div>
       <p class="itinerary-card-description">
         {{ itinerary.description}}
       </p>
-      <button class="itinerary-button">Itinerary</button>
+      <a href="{% url 'itinerary' itinerary.id %}" class="itinerary-card-button">Itinerary</a>
     </div>
-  </a>
+  </div>
 </div>
