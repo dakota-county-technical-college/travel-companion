@@ -7,7 +7,7 @@ form {
 }
 
 .preferences-form {
-    background: #dff8fd;
+    background: #F8F7F5;
     border-radius: 25px;
     padding: 20px;
     width: 80%;
@@ -49,7 +49,7 @@ legend {
 
 /* All text input fields */
 input:not([type=button]):not([type=reset]):not([type=submit]):not([type=image]) {
-    background: #e9fafe;
+    background: #E9FAFF;
     border: none;
     padding: 10px;
     width: 100%;
@@ -72,7 +72,7 @@ input:hover {
 }
 
 input:focus {
-    outline: 5px auto rgba(0, 150, 255, 1);
+    outline: 5px auto rgba(1, 140, 181, 1);
     /* This mirrors Google Chrome's default focus outline */
 }
 
@@ -118,22 +118,28 @@ input {
     gap: 8px;
     padding: 10px 20px;
     border-radius: 15px;
-    background: #b6f2ff;
+    background: #E9FAFF;
+    color:#E9FAFF;
     width: 100%;
 }
 
 .preferences-form label {
-    color: #6e7c82;
+    color: #727070;
     display: block;
 }
 
 .preferences-form input {
     width: 100%;
     outline: none;
-    background-color: #b6f2ff !important;
+    background-color: #E9FAFF !important;
+    color: #727070;
 }
 
 .preferences-form .label-and-input span {
     display: flex;
     align-items: center;
+}
+
+.fa-solid {
+    color: #3B2C27;
 }

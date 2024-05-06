@@ -9,7 +9,7 @@
         {% if request.resolver_match.url_name != 'home' %}
             <span>
                 <ul>
-                    <li><a href="#" class="btn txt bt1">HOME</a></li>
+                    <li><a href="{% url 'home' %}" class="btn txt bt1">HOME</a></li>
                     <li><i class="fa-solid fa-tree"></i></li>
                     <li><a href="#" class="btn txt bt1">PLAN</a></li>
                     <li><i class="fa-solid fa-tree"></i></li>
@@ -30,13 +30,13 @@
             {% endif %}
             <form action="{% url 'logout' %}" method="post" class="inline">
                 {% csrf_token %}
-                <button type="submit" class="btn contained bt2">Log Out</button>
+                <button type="submit" class="btn contained bt1">Log Out</button>
             </form>
         </span>
     {% else %}
-        <span>
-            <button id="nav-register-button" class="btn txt bt2">Sign Up</button>
-            <button id="nav-signin-button" class="btn contained bt1">Log In</button>
+        <span class="nav-register-span">
+            <button id="nav-register-button" class="nav-register-button, btn txt bt1">Sign Up</button>
+            <button id="nav-signin-button" class="nav-register-button, btn txt bt1">Log In</button>
         </span>
     {% endif %}
 </div>
