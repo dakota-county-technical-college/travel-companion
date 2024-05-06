@@ -171,13 +171,13 @@ hr {
 .itinerary-day-left-column {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    min-width: 40%;
 }
 
 .itinerary-day-right-column{
     min-height: 600px;
     height: 100%;
-    width: 60%;
+    min-width: 50%;
     position: sticky;
     top: 5vh;
 }
