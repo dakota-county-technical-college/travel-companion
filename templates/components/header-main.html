@@ -9,7 +9,7 @@
         {% if request.resolver_match.url_name != 'home' %}
             <span>
                 <ul>
-                    <li><a href="#" class="btn txt bt1">HOME</a></li>
+                    <li><a href="{% url 'home' %}" class="btn txt bt1">HOME</a></li>
                     <li><i class="fa-solid fa-tree"></i></li>
                     <li><a href="#" class="btn txt bt1">PLAN</a></li>
                     <li><i class="fa-solid fa-tree"></i></li>
