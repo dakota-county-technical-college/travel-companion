@@ -2,20 +2,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 30vh;
+    height: 15vh;
     width: 90px;
     padding: .4rem .8rem;
-    transform: translate(20px, 20px);
+    transform: translate(90px, 55px);
     transition: all 0.5s ease;
-     /* z-index: 1;*/
 }
 
 .sidebar.active {
-    width: 200px;
-    background-color: #e2e2e2;
-    border-radius: 15px;
+    width: 250px;
+    background-color: rgb(230, 242, 255, 0.7)/*#e2e2e2*/;
+    border-radius: 25px;
     padding-left: 5px;
-     /* z-index: 2;*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add drop shadow */
 }
 
 .sidebar #menu-icon{
@@ -36,7 +35,7 @@
     opacity: 0;
 }
 
-.sidebar.active #close-icon {
+/*.sidebar.active #close-icon {
     position: absolute;
     top: 2.5rem;
     right: 1.5rem;
@@ -44,7 +43,7 @@
     font-size: 1.5rem;
     cursor: pointer;
     opacity: 1;
-}
+}*/
 
 .user {
     display: flex;
@@ -54,8 +53,9 @@
     color: black;
     opacity: 1;
     margin-left: 1rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding: 15px;
+    font-size: 18px;
 }
 
 .bold {
@@ -74,15 +74,17 @@
     color: black;
     display: flex;
     align-items: center;
+    font-size: 15px;
     /*text-decoration: none;*/
     border-radius: 0.8rem;
+    opacity: 0;
 }
 
 .sidebar ul a:hover{
     background-color: #fff;
     color: grey;
     border-radius: 0.8rem; /* Rounded border on hover */
-    padding: 5px;
+    padding: 3 3 0 0;
 }
 
 .sidebar .nav-item{

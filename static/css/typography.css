@@ -213,3 +213,7 @@ itinerary-card-destination {
 .white {
     color: white;
 }
+
+.nav-item{
+    font-family: 'Poppins', 'San-serif';
+}
