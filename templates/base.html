@@ -8,6 +8,10 @@
     <title>{% block title %}Trips-R-Us{% endblock %}</title>
     {% block css %}<link href="{% static 'css/mainstyles.css' %}" type="text/css" rel="stylesheet">{% endblock %}
     <script src="https://kit.fontawesome.com/1ea4dc5d95.js" crossorigin="anonymous"></script>
+    {% block head_javascript %}{% endblock %}
+  <script>
+    const googleMapsApiKey = '{{ google_maps_api_key }}';
+</script>
   </head>
 
   <body>
@@ -30,6 +34,7 @@
 
     <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'static/js/maps.js' %}"></script>
     {% block javascript %}{% endblock %}
   
   </body>
