@@ -6,6 +6,8 @@ class Itinerary(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     destination = models.CharField(max_length=200)
+    destination_lat = models.FloatField(default=0.0)
+    destination_lng = models.FloatField(default=0.0)
     start_date = models.DateField()
     end_date = models.DateField()
     description = models.TextField(blank=True)

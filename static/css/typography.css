@@ -20,7 +20,7 @@ h1 {
 h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 58px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.5px;
 }
   
@@ -133,24 +133,27 @@ h2.bold {
     color: var(--orange);
 }
 
+/* Header nav */
+.nav-register-span {
+    font-weight: 900;
+}
+
 /* Itinerary Page */
 #itinerary-title {
     color: var(--orange);
     font-size: 40px;
+    text-decoration: none;
 }
 
 .itinerary-day-title {
     font-size: 25px;
+    margin-bottom: 16px;
 }
 
 /* Activity card typography */ 
 .activity-card-activity {
     color: var(--orange);
     font-family: 'Poppins', sans-serif;
-    font-size: 1.2em;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding: 20px 20px 0px 20px;
 }
 
 .activity-card-time {
@@ -168,7 +171,51 @@ h2.bold {
   text-align: center;
 }
 
+/* Itinerary card typography */
+itinerary-card-destination {
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    font-size: 23px;
+    color: #3B2C27;/* Set text color */
+    text-decoration: none;
+}
+
+.itinerary-card a {
+    text-decoration: none;
+}
+
+.itinerary-card-date {
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    font-weight: 500;
+    color: #BF6A0F; /* Set text color */
+}
+
+.itinerary-card-description {
+    font-family: Roboto, 
+}
+
+.itinerary-card-content h4,
+.itinerary-card-content .itinerary-card-date,
+.itinerary-card-content p {
+    margin-bottom: 15px; /* Adjust the margin as needed */
+}
+
+.itinerary-card-button {
+    background: none;
+    border: none;
+    color: #018CB5;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+
+
 /* Used to convert any text to white when used on a dark colored background */
 .white {
     color: white;
+}
+
+.nav-item{
+    font-family: 'Poppins', 'San-serif';
 }

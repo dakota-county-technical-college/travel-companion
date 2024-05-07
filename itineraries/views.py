@@ -6,6 +6,10 @@ from django.urls import reverse
 from .models import Activity, Itinerary, PreferencesFormResponse
 from .forms import PreferencesForm, UserRegistrationForm
 from utils import helpers
+import json
+from django.conf import settings
+
+
 
 
 def index(request):
@@ -29,7 +33,7 @@ def index(request):
             end_date = form.cleaned_data['end_date']
             travelers = form.cleaned_data['travelers']
 
-            success, recommended_places_or_message = helpers.get_recommendation(destination, start_date, end_date)
+            success, recommended_places_or_message, location = helpers.get_recommendation(destination, start_date, end_date)
 
             if not success:
                 # In case of failure, recommended_places_or_message contains the error message.
@@ -41,13 +45,15 @@ def index(request):
                 else:
                     user = None
                 itinerary_id = helpers.save_itinerary(user, destination, start_date, end_date, travelers,
-                                                      recommended_places_or_message)
+                                                      recommended_places_or_message, location[0], location[1])
                 # If successful, pass the structured itinerary to the context
-                context['itinerary'] = recommended_places_or_message
-                context['start_date'] = start_date
-                context['end_date'] = end_date
-                context['destination'] = destination
-
+                # context['itinerary'] = recommended_places_or_message
+                # context['start_date'] = start_date
+                # context['end_date'] = end_date
+                # context['destination'] = destination
+                context['map_data'] = helpers.get_map_data(itinerary_id)
+                context['map_default_location'] = helpers.get_map_default_location(itinerary_id)
+                request.session['itinerary_context'] = context
                 return redirect(reverse('itinerary', args=[itinerary_id]))
     else:
         form = PreferencesForm()
@@ -62,11 +68,18 @@ def itinerary(request, itinerary_id):
     Returns:
         if user is logged in and requested for an itinerary. this endpoint will return a page with the trip plan
     """
+    GOOGLE_MAPS_API_KEY = helpers.load_google_maps_api_key()
+    context = request.session.get('itinerary_context')
+    if context:
+        map_data = context.pop('map_data')
+        map_default_location = context.pop('map_default_location')
+
+    # encoded_context = json.dumps(context)
     itinerary = Itinerary.objects.get(id=itinerary_id)
     days = itinerary.days.all()
     activities = Activity.objects.filter(day__in=days)
     # TODO: Only show the itinerary if the user is the owner of the itinerary, otherwise redirect to the home page.
-    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities})
+    return render(request, 'itinerary.html', {'itinerary': itinerary, 'activities': activities, 'map_data': map_data, 'map_default_location': map_default_location, 'google_maps_api_key': GOOGLE_MAPS_API_KEY})
 
 
 def trips(request):
@@ -174,4 +187,4 @@ def map(request):
     return render(request, 'test/map.html')
 
 def profile_view(request):
-    return redirect(request, 'profile')
+    return render(request, 'profile.html')

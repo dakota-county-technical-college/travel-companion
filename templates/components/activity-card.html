@@ -1,11 +1,11 @@
 {% load static %}
-<div class="activity-card">
+<div class="activity-card" id="{{ activity.name }}">
     <div class="activity-card-media">
       <img src="{{ activity.photos }}" alt="Photo of {{ activity.name }}">
     </div>
-    <h4 class="activity-card-activity">{{ activity.name }}</h4>
+    <h5 class="activity-card-activity">{{ activity.name }}</h5>
     <div class="activity-card-content">
-        <h5 class="activity-card-address">{{ actvity.address }}</h5>
+        <h6 class="activity-card-address">{{ actvity.address }}</h6>
         <p class="activity-card-description">{{ activity.editSummary }}</p>
     </div>
     <div class="activity-card-time">{{ activity.start_time }} - {{activity.end_time}} </div>

@@ -3,8 +3,8 @@
 This project is all about revolutionizing the way people plan their travels. Our web-based application offers personalized travel planning experiences by generating custom itineraries tailored to user preferences. Whether you're looking for adventure, relaxation, cultural immersion, or culinary experiences, Trips-R-Us makes your travel planning seamless and intuitive. Dive into our code, contribute, or simply explore how we're using Django and cutting-edge technologies to bring personalized travel planning to your fingertips. Join us on this journey to make travel planning easier, smarter, and more personalized than ever before!
 
 ## Table of Contents
-
-- [Getting Started](#getting-started)
+- [Getting Started (Instructor)](#getting-started-instructor)
+- [Getting Started (Developers)](#getting-started)
   - [Clone Repository](#clone-repository)
   - [Setup Virtual Environment](#setup-virtual-environment)
   - [Activate Virtual Environment](#activate-virtual-environment)
@@ -19,6 +19,30 @@ This project is all about revolutionizing the way people plan their travels. Our
 - [Dealing with Merge Conflics](#dealing-with-merge-conflicts)
   - [Scenario](#scenario)
   - [Steps to Resolve Merge Conflicts](#steps-to-resolve-merge-conflicts)
+
+## Getting Started Instructor
+
+Once the file is unzipped, open the file in VS Code (or another text editor with terminal support).
+
+In the terminal, run the following command to activate the virtual environment.
+
+```shell
+. venv/bin/activate
+```
+
+Install the project dependencies as specified in requirements.txt:
+
+```shell
+pip install -r requirements.txt
+```
+
+Note: If "pip" is not found, try "pip3" instead.
+
+Run the application by running the following and navigating to local server port 8000 in the browser:
+
+```shell
+python manage.py runserver
+```
 
 ## Getting Started
 
